@@ -2,12 +2,12 @@
 #include <string.h>
 
 #include "../common/defines.h"
-bool setFlag(char flag, flags* f);
-bool checkLong(char* s, flags* f);
-bool checkFlags(int argc, char** argv, flags* f);
-void cat(flags* f);
+bool setFlag(char flag, flags *f);
+bool checkLong(char *s, flags *f);
+bool checkFlags(int argc, char **argv, flags *f);
+void cat(flags *f);
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     flags f = {};
     flagsInit(&f);
     int codeOfParse = checkFlags(argc, argv, &f);
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     deleteGarbage();
     return 0;
 }
-bool checkLong(char* s, flags* f) {
+bool checkLong(char *s, flags *f) {
     bool answer = false;
     if (strcmp(s, "number-nonblank") == 0) {
         f->b = true;
@@ -33,7 +33,7 @@ bool checkLong(char* s, flags* f) {
     return answer;
 }
 
-bool setFlag(char flag, flags* f) {
+bool setFlag(char flag, flags *f) {
     int answer = true;
     switch (flag) {
         case 'b':
@@ -69,7 +69,7 @@ bool setFlag(char flag, flags* f) {
     return answer;
 }
 
-bool checkFlags(int argc, char** argv, flags* f) {
+bool checkFlags(int argc, char **argv, flags *f) {
     int stopIndex = 0;
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] == '-') {
@@ -79,7 +79,7 @@ bool checkFlags(int argc, char** argv, flags* f) {
                     return false;
                 }
             } else {
-                char* ptr = &argv[i][1];
+                char *ptr = &argv[i][1];
                 while (*ptr != '\0') {
                     if (setFlag(*ptr, f) == false) {
                         printf("cat: illegal option -- %c\nusage: cat [-benstuv] [file ...]\n", *ptr);
@@ -93,7 +93,7 @@ bool checkFlags(int argc, char** argv, flags* f) {
             break;
         }
     }
-    FILE* files = fopen(".files", "w");
+    FILE *files = fopen(".files", "w");
     for (int i = stopIndex; i < argc; i++) {
         fprintf(files, "%s\n", argv[i]);
     }
@@ -101,13 +101,13 @@ bool checkFlags(int argc, char** argv, flags* f) {
     return true;
 }
 
-void cat(flags* f) {
-    FILE* files = fopen(".files", "r");
+void cat(flags *f) {
+    FILE *files = fopen(".files", "r");
 
     char path[1024] = {};
     while (fgets(path, 1024, files)) {
         deleteLast(path);
-        FILE* file = fopen(path, "r");
+        FILE *file = fopen(path, "r");
         if (file == nullptr) {
             printf("cat: %s: No such file or directory\n", path);
         } else {
@@ -117,7 +117,6 @@ void cat(flags* f) {
             while (fgets(buffer, 2048, file)) {
                 if (f->s && lastStrIsEmpty && strcmp(buffer, "\n") == 0) {
                     continue;
-
                 } else {
                     if (f->n) {
                         printf("%6d%c", line, 9);

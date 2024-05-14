@@ -9,6 +9,12 @@ void writeToFile(int argc, char** argv, int i, int j, FILE* file);
 bool checkFlags(int argc, char** argv, flags* f);
 void createTempFile();
 bool fillPatternsFromFiles();
+void fillFiles(int argc, char** argv);
+void oldGrep(flags* f, int quantityOfFiles);
+void printLine(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter);
+void grep(flags* f, int quantityOfFiles, int quantityOfPatterns);
+int countFiles();
+void magic();
 
 int main(int argc, char* argv[]) {
     flags f;

@@ -23,7 +23,7 @@ typedef struct flags {
     bool t;
 } flags;
 
-void flagsInit(flags* f) {
+void flagsInit(flags *f) {
     f->e = false;
     f->i = false;
     f->v = false;
@@ -38,7 +38,7 @@ void flagsInit(flags* f) {
     f->t = false;
 }
 
-void deleteLast(char* s) {
+void deleteLast(char *s) {
     int len = strlen(s);
     if (len > 1) {
         s[len - 1] = '\0';

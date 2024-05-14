@@ -14,6 +14,7 @@ void oldGrep(flags* f, int quantityOfFiles);
 void printLine(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter);
 void grep(flags* f, int quantityOfFiles, int quantityOfPatterns);
 int countFiles();
+int countPatterns();
 void magic();
 
 int main(int argc, char* argv[]) {

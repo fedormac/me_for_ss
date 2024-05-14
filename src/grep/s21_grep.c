@@ -4,6 +4,11 @@
 #include <string.h>
 
 #include "../common/defines.h"
+int setFlag(char flag, flags* f);
+void writeToFile(int argc, char** argv, int i, int j, FILE* file);
+bool checkFlags(int argc, char** argv, flags* f);
+void createTempFile();
+bool fillPatternsFromFiles();
 
 int main(int argc, char* argv[]) {
     flags f;

@@ -103,7 +103,7 @@ bool checkFlags(int argc, char** argv, flags* f) {
 
 void cat(flags* f) {
     FILE* files = fopen(".files", "r");
-    char path[1024];
+    char path[1024] = {};
     while (fgets(path, 1024, files)) {
         deleteLast(path);
         FILE* file = fopen(path, "r");

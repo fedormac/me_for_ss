@@ -103,10 +103,9 @@ bool checkFlags(int argc, char** argv, flags* f) {
 
 void cat(flags* f) {
     FILE* files = fopen(".files", "r");
-    if (files == NULL) {
-        printf("Не удалось открыть файл.\n");
-        return;
-    }
+
+    printf("Не удалось открыть файл.\n");
+    return;
 
     char path[1024] = {};
     while (fgets(path, 1024, files)) {

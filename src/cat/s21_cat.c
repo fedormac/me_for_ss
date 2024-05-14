@@ -8,7 +8,7 @@ bool checkFlags(int argc, char** argv, flags* f);
 void cat(flags* f);
 
 int main(int argc, char* argv[]) {
-    flags f;
+    flags f = {};
     flagsInit(&f);
     int codeOfParse = checkFlags(argc, argv, &f);
     if (codeOfParse == false) {

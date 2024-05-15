@@ -19,10 +19,10 @@ void magic();
 
 int main(int argc, char* argv[]) {
     flags f = {};
-    flagsInit(&f);
+    flags_Init(&f);
     create_Temp_File();
     if (!check_Flags(argc, argv, &f)) {
-        deleteGarbage();
+        delete_Garbage();
         return 0;
     }
     fill_Files(argc, argv);
@@ -149,7 +149,7 @@ bool fill_Patterns_From_Files() {
     FILE* patterns = fopen(".patterns", "a");
     char path[1024];
     while (fgets(path, 1024, patternFiles)) {
-        deleteLast(path);
+        delete_Last(path);
         FILE* file = fopen(path, "r");
         if (file == nullptr) {
             printf("grep: %s: No such file or directory\n", path);

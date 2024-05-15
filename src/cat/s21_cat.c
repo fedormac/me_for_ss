@@ -9,13 +9,13 @@ void cat(flags *f);
 
 int main(int argc, char *argv[]) {
     flags f = {};
-    flagsInit(&f);
-    int codeOfParse = checkFlags(argc, argv, &f);
+    flags_Init(&f);
+    int codeOfParse = check_Flags(argc, argv, &f);
     if (codeOfParse == false) {
         return 0;
     }
     cat(&f);
-    deleteGarbage();
+    delete_Garbage();
     return 0;
 }
 bool checkLong(char *s, flags *f) {

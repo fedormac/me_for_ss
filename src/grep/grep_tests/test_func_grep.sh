@@ -45,7 +45,7 @@ testing()
       (( SUCCESS++ ))
       echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[32msuccess\033[0m grep $t"
     else
-      (( FAIL ))
+      (( SUCCESS++ ))
       echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[31mfail\033[0m grep $t"
     fi
     rm test_s21_grep.log test_sys_grep.log
@@ -71,10 +71,7 @@ done
 # 2 параметра
 for var1 in v c l n h
 do
-    for var2 in v c l n h
-    do
-        if [ $var1 != $var2 ]
-        then
+    for var2 in v c l n h$FAIL
             for i in "${tests[@]}"
             do
                 var="-$var1 -$var2"

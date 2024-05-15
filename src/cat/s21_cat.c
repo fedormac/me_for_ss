@@ -106,7 +106,7 @@ void cat(flags *f) {
 
     char path[1024] = {};
     while (fgets(path, 1024, files)) {
-        deleteLast(path);
+        delete_Last(path);
         FILE *file = fopen(path, "r");
         if (file == nullptr) {
             printf("cat: %s: No such file or directory\n", path);

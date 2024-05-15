@@ -22,12 +22,12 @@ flags=(
 
 tests=(
 "s test_files/test_0_grep.txt FLAGS"
-"for main.c main.h Makefile FLAGS"
-"for main.c FLAGS"
-"-e for -e ^int main.c main.h Makefile FLAGS"
-"-e for -e ^int main.c FLAGS"
-"-e regex -e ^print main.c FLAGS -f test_files/test_ptrn_grep.txt"
-"-e while -e void main.c Makefile FLAGS -f test_files/test_ptrn_grep.txt"
+"for s21_grep.c ../common/defines.h Makefile FLAGS"
+"for s21_grep.c FLAGS"
+"-e for -e ^int s21_grep.c ../common/defines.h Makefile FLAGS"
+"-e for -e ^int s21_grep.c FLAGS"
+"-e regex -e ^print s21_grep.c FLAGS -f test_files/test_ptrn_grep.txt"
+"-e while -e void s21_grep.c Makefile FLAGS -f test_files/test_ptrn_grep.txt"
 "-e intel -e int FLAGS test_files/test_7_grep.txt"
 "-e int -e intel FLAGS test_files/test_7_grep.txt"
 )
@@ -56,7 +56,7 @@ manual=(
 "-e ing -e as -e the -e not -e is test_files/test_6_grep.txt"
 "-c -e . test_files/test_1_grep.txt -e '.'"
 "-l for no_file.txt test_files/test_2_grep.txt"
-"-e int -si no_file.txt s21_grep.c no_file2.txt s21_grep.h"
+"-e int -si no_file.txt s21_grep.c no_file2.txt ../common/defines.h"
 "-si s21_grep.c -f no_pattern.txt"
 "-f test_files/test_3_grep.txt test_files/test_5_grep.txt"
 )

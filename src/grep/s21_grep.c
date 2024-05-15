@@ -4,8 +4,8 @@
 #include <string.h>
 
 #include "../common/defines.h"
-int setFlag(char flag, flags* f);
-void writeToFile(int argc, char** argv, int i, int j, FILE* file);
+int set_Flag(char flag, flags* f);
+void write_To_File(int argc, char** argv, int i, int j, FILE* file);
 bool checkFlags(int argc, char** argv, flags* f);
 void createTempFile();
 bool fillPatternsFromFiles();
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-int setFlag(char flag, flags* f) {
+int set_Flag(char flag, flags* f) {
     int answer = 1;
     switch (flag) {
         case 'e':
@@ -82,7 +82,7 @@ int setFlag(char flag, flags* f) {
     return answer;
 }
 
-void writeToFile(int argc, char** argv, int i, int j, FILE* file) {
+void write_To_File(int argc, char** argv, int i, int j, FILE* file) {
     if (j < (int)strlen(argv[i]) - 1) {
         for (j++; j < (int)strlen(argv[i]); j++) {
             fprintf(file, "%c", argv[i][j]);
@@ -104,14 +104,14 @@ bool checkFlags(int argc, char** argv, flags* f) {
             for (int j = 1; j < (int)strlen(argv[i]); j++) {
                 if (argv[i][j] == 'e' || argv[i][j] == 'f') {
                     if (argv[i][j] == 'e') {
-                        writeToFile(argc, argv, i, j, patterns);
+                        write_To_File(argc, argv, i, j, patterns);
                         f->e = true;
                     } else {
-                        writeToFile(argc, argv, i, j, patternFiles);
+                        write_To_File(argc, argv, i, j, patternFiles);
                         f->f = true;
                     }
                     break;
-                } else if (!setFlag(argv[i][j], f)) {
+                } else if (!set_Flag(argv[i][j], f)) {
                     printf("grep: invalid option -- %c\n", argv[i][j]);
                     printf(
                         "usage: grep [-abcDEFGHhIiJLlmnOoqRSsUVvwxZ] [-A num] [-B num] "

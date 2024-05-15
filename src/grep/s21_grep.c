@@ -18,7 +18,7 @@ int countPatterns();
 void magic();
 
 int main(int argc, char* argv[]) {
-    flags f;
+    flags f = {};
     flagsInit(&f);
     createTempFile();
     if (!checkFlags(argc, argv, &f)) {

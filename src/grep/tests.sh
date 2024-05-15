@@ -5,7 +5,7 @@ COUNTER=0
 DIFF=""
 
 s21_command=(
-    "../s21_grep"
+    "./s21_grep"
     )
 sys_command=(
     "grep"

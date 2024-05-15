@@ -2,9 +2,9 @@
 #include <string.h>
 
 #include "../common/defines.h"
-bool setFlag(char flag, flags *f);
-bool checkLong(char *s, flags *f);
-bool checkFlags(int argc, char **argv, flags *f);
+bool set_Flag(char flag, flags *f);
+bool check_Long(char *s, flags *f);
+bool check_Flags(int argc, char **argv, flags *f);
 void cat(flags *f);
 
 int main(int argc, char *argv[]) {
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     delete_Garbage();
     return 0;
 }
-bool checkLong(char *s, flags *f) {
+bool check_Long(char *s, flags *f) {
     bool answer = false;
     if (strcmp(s, "number-nonblank") == 0) {
         f->b = true;
@@ -33,7 +33,7 @@ bool checkLong(char *s, flags *f) {
     return answer;
 }
 
-bool setFlag(char flag, flags *f) {
+bool set_Flag(char flag, flags *f) {
     int answer = true;
     switch (flag) {
         case 'b':
@@ -69,19 +69,19 @@ bool setFlag(char flag, flags *f) {
     return answer;
 }
 
-bool checkFlags(int argc, char **argv, flags *f) {
+bool check_Flags(int argc, char **argv, flags *f) {
     int stopIndex = 0;
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] == '-') {
             if (argv[i][1] == '-') {
-                if (checkLong(&argv[i][2], f) == false) {
+                if (check_Long(&argv[i][2], f) == false) {
                     printf("cat: illegal option -- -\nusage: cat [-benstuv] [file ...]\n");
                     return false;
                 }
             } else {
                 char *ptr = &argv[i][1];
                 while (*ptr != '\0') {
-                    if (setFlag(*ptr, f) == false) {
+                    if (set_Flag(*ptr, f) == false) {
                         printf("cat: illegal option -- %c\nusage: cat [-benstuv] [file ...]\n", *ptr);
                         return false;
                     }

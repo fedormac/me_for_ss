@@ -6,11 +6,11 @@
 #include "../common/defines.h"
 int set_Flag(char flag, flags* f);
 void write_To_File(int argc, char** argv, int i, int j, FILE* file);
-bool checkFlags(int argc, char** argv, flags* f);
-void createTempFile();
-bool fillPatternsFromFiles();
-void fillFiles(int argc, char** argv);
-void oldGrep(flags* f, int quantityOfFiles);
+bool check_Flags(int argc, char** argv, flags* f);
+void create_Temp_File();
+bool fill_Patterns_From_Files();
+void fill_Files(int argc, char** argv);
+void old_Grep(flags* f, int quantityOfFiles);
 void printLine(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter);
 void grep(flags* f, int quantityOfFiles, int quantityOfPatterns);
 int countFiles();
@@ -20,14 +20,14 @@ void magic();
 int main(int argc, char* argv[]) {
     flags f = {};
     flagsInit(&f);
-    createTempFile();
-    if (!checkFlags(argc, argv, &f)) {
+    create_Temp_File();
+    if (!check_Flags(argc, argv, &f)) {
         deleteGarbage();
         return 0;
     }
-    fillFiles(argc, argv);
+    fill_Files(argc, argv);
     if (f.f == true) {
-        if (fillPatternsFromFiles() == false) {
+        if (fill_Patterns_From_Files() == false) {
             deleteGarbage();
             return 0;
         }
@@ -96,7 +96,7 @@ void write_To_File(int argc, char** argv, int i, int j, FILE* file) {
     }
 }
 
-bool checkFlags(int argc, char** argv, flags* f) {
+bool check_Flags(int argc, char** argv, flags* f) {
     FILE* patternFiles = fopen(".patternFiles", "a");
     FILE* patterns = fopen(".patterns", "a");
     for (int i = 1; i < argc; i++) {
@@ -135,7 +135,7 @@ bool checkFlags(int argc, char** argv, flags* f) {
     return 1;
 }
 
-void createTempFile() {
+void create_Temp_File() {
     FILE* patternFiles = fopen(".patternFiles", "w");
     FILE* patterns = fopen(".patterns", "w");
     FILE* words = fopen(".files", "w");
@@ -144,7 +144,7 @@ void createTempFile() {
     fclose(words);
 }
 
-bool fillPatternsFromFiles() {
+bool fill_Patterns_From_Files() {
     FILE* patternFiles = fopen(".patternFiles", "r");
     FILE* patterns = fopen(".patterns", "a");
     char path[1024];
@@ -168,7 +168,7 @@ bool fillPatternsFromFiles() {
     return 1;
 }
 
-void fillFiles(int argc, char** argv) {
+void fill_Files(int argc, char** argv) {
     FILE* files = fopen(".files", "a");
     for (int i = 1; i < argc; i++) {
         if (argv[i][0] != '-') {
@@ -185,7 +185,7 @@ void fillFiles(int argc, char** argv) {
     fclose(files);
 }
 
-void oldGrep(flags* f, int quantityOfFiles) {
+void old_Grep(flags* f, int quantityOfFiles) {
     FILE* files = fopen(".files", "r");
     char path[1024];
     while (fgets(path, 1024, files)) {

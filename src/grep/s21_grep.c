@@ -11,10 +11,10 @@ void create_Temp_File();
 bool fill_Patterns_From_Files();
 void fill_Files(int argc, char** argv);
 void old_Grep(flags* f, int quantityOfFiles);
-void printLine(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter);
+void print_Line(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter);
 void grep(flags* f, int quantityOfFiles, int quantityOfPatterns);
-int countFiles();
-int countPatterns();
+int count_Files();
+int count_Patterns();
 void magic();
 
 int main(int argc, char* argv[]) {
@@ -35,8 +35,8 @@ int main(int argc, char* argv[]) {
     if (f.f == false && f.e == false) {
         magic();
     }
-    int files = countFiles();
-    int patterns = countPatterns();
+    int files = count_Files();
+    int patterns = count_Patterns();
     grep(&f, files, patterns);
     deleteGarbage();
     return 0;
@@ -275,7 +275,7 @@ void old_Grep(flags* f, int quantityOfFiles) {
     fclose(files);
 }
 
-void printLine(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter) {
+void print_Line(flags* f, int quantityOfFiles, char* path, char* line, int lineCounter) {
     if (f->l == false && f->c == false) {
         if (f->h == false && quantityOfFiles != 1) {
             printf("%s:", path);
@@ -322,7 +322,7 @@ void grep(flags* f, int quantityOfFiles, int quantityOfPatterns) {
             for (int i = 0; i < quantityOfPatterns; i++) {
                 int returnValue = regexec(&regex[i], line, 0, &find, 0);
                 if (f->v == true && returnValue == REG_NOMATCH) {
-                    printLine(f, quantityOfFiles, path, line, lineCounter);
+                    print_Line(f, quantityOfFiles, path, line, lineCounter);
                     matchCounter++;
                     if (f->l == true) {
                         fileFlag = true;
@@ -330,7 +330,7 @@ void grep(flags* f, int quantityOfFiles, int quantityOfPatterns) {
                     break;
                 }
                 if (f->v == false && returnValue == 0) {
-                    printLine(f, quantityOfFiles, path, line, lineCounter);
+                    print_Line(f, quantityOfFiles, path, line, lineCounter);
                     matchCounter++;
                     if (f->l == true) {
                         fileFlag = true;
@@ -360,7 +360,7 @@ void grep(flags* f, int quantityOfFiles, int quantityOfPatterns) {
     fclose(files);
 }
 
-int countFiles() {
+int count_Files() {
     FILE* files = fopen(".files", "r");
     int answer = 0;
     char file[1024];
@@ -370,7 +370,7 @@ int countFiles() {
     return answer;
 }
 
-int countPatterns() {
+int count_Patterns() {
     FILE* patterns = fopen(".patterns", "r");
     int answer = 0;
     char pattern[1024];

@@ -23,7 +23,7 @@ typedef struct flags {
     bool t;
 } flags;
 
-void flagsInit(flags *f) {
+void flags_Init(flags *f) {
     f->e = false;
     f->i = false;
     f->v = false;
@@ -38,14 +38,14 @@ void flagsInit(flags *f) {
     f->t = false;
 }
 
-void deleteLast(char *s) {
+void delete_Last(char *s) {
     int len = strlen(s);
     if (len > 1) {
         s[len - 1] = '\0';
     }
 }
 
-void deleteGarbage() {
+void delete_Garbage() {
     system("rm -rf .files");
     system("rm -rf .patternFiles");
     system("rm -rf .patterns");

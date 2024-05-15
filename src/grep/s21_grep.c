@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     fill_Files(argc, argv);
     if (f.f == true) {
         if (fill_Patterns_From_Files() == false) {
-            deleteGarbage();
+            delete_Garbage();
             return 0;
         }
     }
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     int files = count_Files();
     int patterns = count_Patterns();
     grep(&f, files, patterns);
-    deleteGarbage();
+    delete_Garbage();
     return 0;
 }
 
@@ -189,7 +189,7 @@ void old_Grep(flags* f, int quantityOfFiles) {
     FILE* files = fopen(".files", "r");
     char path[1024];
     while (fgets(path, 1024, files)) {
-        deleteLast(path);
+        delete_Last(path);
         FILE* file = fopen(path, "r");
         if (file == nullptr) {
             if (f->s == false) {
@@ -209,7 +209,7 @@ void old_Grep(flags* f, int quantityOfFiles) {
             flagI = REG_ICASE;
         }
         while (fgets(pattern, 1024, patterns)) {
-            deleteLast(pattern);
+            delete_Last(pattern);
             regcomp(&regex, pattern, flagI);
         }
         while (fgets(line, 1024, file)) {
@@ -217,7 +217,7 @@ void old_Grep(flags* f, int quantityOfFiles) {
             FILE* patterns = fopen(".patterns", "r");
             char pattern[1024];
             while (fgets(pattern, 1024, patterns)) {
-                deleteLast(pattern);
+                delete_Last(pattern);
                 regex_t regex;
                 int returnValue = 0;
                 regmatch_t find;
@@ -299,12 +299,12 @@ void grep(flags* f, int quantityOfFiles, int quantityOfPatterns) {
     }
     int counter = 0;
     while (fgets(pattern, 1024, patterns)) {
-        deleteLast(pattern);
+        delete_Last(pattern);
         regcomp(&regex[counter++], pattern, flag);
     }
     fclose(patterns);
     while (fgets(path, 1024, files)) {
-        deleteLast(path);
+        delete_Last(path);
         FILE* file = fopen(path, "r");
         if (file == nullptr) {
             if (f->s == false) {

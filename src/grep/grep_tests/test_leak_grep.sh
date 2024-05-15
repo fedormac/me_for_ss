@@ -53,10 +53,10 @@ testing()
     if [[ $leak == *"0 leaks for 0 total leaked bytes"* ]]
     then
       (( SUCCESS++ ))
-        echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[32msuccess\033[0m grep $t"
+        echo "\033[31m$FAIL\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[32msuccess\033[0m grep $t"
     else
-      (( FAIL ))
-        echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[31mfail\033[0m grep $t"
+      (( FAIL++ ))
+        echo "\033[31m$FAIL\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[31mfail\033[0m grep $t"
 #        echo "$leak"
     fi
     rm test_s21_grep.log

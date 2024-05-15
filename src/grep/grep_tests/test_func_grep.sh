@@ -71,7 +71,10 @@ done
 # 2 параметра
 for var1 in v c l n h
 do
-    for var2 in v c l n h$FAIL
+    for var2 in v c l n h
+    do
+        if [ $var1 != $var2 ]
+        then
             for i in "${tests[@]}"
             do
                 var="-$var1 -$var2"

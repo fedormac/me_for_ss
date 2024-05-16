@@ -9,48 +9,48 @@
 typedef int bool;
 
 typedef struct flags {
-    bool e;
-    bool i;
-    bool v;
-    bool c;
-    bool l;
-    bool n;
-    bool h;
-    bool s;
-    bool f;
-    bool o;
-    bool b;
-    bool t;
+  bool e;
+  bool i;
+  bool v;
+  bool c;
+  bool l;
+  bool n;
+  bool h;
+  bool s;
+  bool f;
+  bool o;
+  bool b;
+  bool t;
 } flags;
 
 void flags_Init(flags *f) {
-    f->e = false;
-    f->i = false;
-    f->v = false;
-    f->c = false;
-    f->l = false;
-    f->n = false;
-    f->h = false;
-    f->s = false;
-    f->f = false;
-    f->o = false;
-    f->b = false;
-    f->t = false;
+  f->e = false;
+  f->i = false;
+  f->v = false;
+  f->c = false;
+  f->l = false;
+  f->n = false;
+  f->h = false;
+  f->s = false;
+  f->f = false;
+  f->o = false;
+  f->b = false;
+  f->t = false;
 }
 
 void delete_Last(char *s) {
-    int len = strlen(s);
-    if (len > 1) {
-        s[len - 1] = '\0';
-    }
+  int len = strlen(s);
+  if (len > 1) {
+    s[len - 1] = '\0';
+  }
 }
 
 void delete_Garbage() {
-    system("rm -rf .files");
-    system("rm -rf .patternFiles");
-    system("rm -rf .patterns");
-    system("rm -rf .secondFiles");
-    system("rm -rf .newPatterns");
+  system("rm -rf .files");
+  system("rm -rf .patternFiles");
+  system("rm -rf .patterns");
+  system("rm -rf .secondFiles");
+  system("rm -rf .newPatterns");
 }
 
 #endif  // SRC_COMMON_DEFINES_H_

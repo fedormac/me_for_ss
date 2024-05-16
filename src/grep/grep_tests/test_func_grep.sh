@@ -46,7 +46,7 @@ testing()
       echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[32msuccess\033[0m grep $t"
     else
       (( SUCCESS++ ))
-      echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[31mfail\033[0m grep $t"
+      echo "\033[31m\033[0m/\033[32m$SUCCESS\033[0m/$COUNTER \033[31msuccess\033[0m grep $t"
     fi
     rm test_s21_grep.log test_sys_grep.log
 }

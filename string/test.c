@@ -3,19 +3,32 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str[] = "mss1";
-  char substr[] = "prid mss";
+  char str[] = "Привет, мир, Как, дела?";
+  char delimiters[] = ",.!?";
 
-  char *found = strstr(str, substr);
+  char *token = strtok(str, delimiters);
 
-  if (found != NULL) {
-    printf("Подстрока '%ld' найдена в строке.\n", found - substr);
-  } else {
-    printf("Подстрока '%s' не найдена в строке.\n", substr);
+  while (token != NULL) {
+    printf("%s\n", token);
+    token = strtok(NULL, delimiters);
   }
 
   return 0;
 }
+// int main() {
+//   char str[] = "mss1";
+//   char substr[] = "prid mss";
+
+//   char *found = strstr(str, substr);
+
+//   if (found != NULL) {
+//     printf("Подстрока '%ld' найдена в строке.\n", found - substr);
+//   } else {
+//     printf("Подстрока '%s' не найдена в строке.\n", substr);
+//   }
+
+//   return 0;
+// }
 // int main() {
 //   char str[] = "mss ";
 //   char validChars[] = "mss prod";

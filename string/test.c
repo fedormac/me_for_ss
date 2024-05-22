@@ -5,12 +5,22 @@ int main() {
   char str1[50] = "Hello, ";
   char str2[] = "World";
 
-  strcat(str1, str2);  // Конкатенируем str2 к str1
+  strncat(str1, str2, 6);  // Конкатенируем первые 6 символов str2 к str1
 
-  printf("%s\n", str1);  // Вывод: Hello, World!
+  printf("%s\n", str1);  // Вывод: Hello, Worl
 
   return 0;
 }
+// int main() {
+//   char str1[50] = "Hello, ";
+//   char str2[] = "World";
+
+//   strcat(str1, str2);  // Конкатенируем str2 к str1
+
+//   printf("%s\n", str1);  // Вывод: Hello, World!
+
+//   return 0;
+// }
 // int main() {
 //   char buffer[50];
 

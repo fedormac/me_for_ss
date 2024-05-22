@@ -12,6 +12,7 @@ void *s21_memcpy(void *_dest, const void *_src, size_t n);
 void *s21_memmove(void *_dest, const void *_src, size_t n);
 void *s21_memset(void *_str, int c, size_t n);
 char *s21_strcat(char *dest, const char *src);
+char *s21_strncat(char *dest, const char *src, size_t n);
 /*
 1
 2
@@ -19,6 +20,7 @@ char *s21_strcat(char *dest, const char *src);
 4
 5
 6
+7
 15
 
 */
@@ -27,7 +29,7 @@ int main() {
   char *str2 = "abdprod";
 
   char find[200] = "mss ";
-  s21_strcat(find, str2);
+  // s21_strcat(find, str2);s21_strncat(find, str2,1);
   printf("%s\n", find);
   /*
  find = calloc(200, sizeof(char));  find[0] = 'm';  find[1] = 's';  find[2] =
@@ -40,6 +42,21 @@ int main() {
  */
   return 0;
 }
+char *s21_strncat(char *dest, const char *src, size_t n) {
+  int i = 0, i2 = 0;
+  while (dest[i] != '\0') {
+    i++;
+  }
+  dest[i] != ' ';
+  while (src[i2] != '\0' && i2 != n) {
+    dest[i] = src[i2];
+    i2++;
+    i++;
+  }
+
+  return dest;
+}
+
 char *s21_strcat(char *dest, const char *src) {
   int i = 0, i2 = 0;
   while (dest[i] != '\0') {

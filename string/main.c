@@ -17,6 +17,7 @@ char *s21_strchr(const char *str, int c);
 int s21_strcmp(const char *str1, const char *str2);
 int s21_strncmp(const char *str1, const char *str2, size_t n);
 char *s21_strcpy(char *dest, const char *src);
+char *s21_strncpy(char *dest, const char *src, size_t n);
 /*
 1
 2
@@ -29,12 +30,13 @@ char *s21_strcpy(char *dest, const char *src);
 9
 10
 11
+12
 15
 
 */
 int main() {
   char *str = "adgbc";
-  char *str2 = "adgbd1";
+  char *str2 = "Hello, World!";
 
   char find[200];
   /*
@@ -54,7 +56,22 @@ int main() {
   // printf("%d\n", comparison_result);
   //   s21_strcpy(find, str2);
   // printf("%s\n", find);
+  s21_strncpy(find, str2, 8);
+
+  find[sizeof(find) - 1] = '\0';
+
+  printf("%s\n", find);  // Вывод: Hello, World!
+
   return 0;
+}
+char *s21_strncpy(char *dest, const char *src, size_t n) {
+  int i = 0, size = s21_str_len(src) + 1;
+  while (i != size && i < n) {
+    dest[i] = src[i];
+    i++;
+  }
+
+  return dest;
 }
 char *s21_strcpy(char *dest, const char *src) {
   int i = 0, size = s21_str_len(src) + 1;

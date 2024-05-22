@@ -6,12 +6,27 @@ int main() {
   char source[] = "Hello, World!";
   char destination[50];
 
-  strcpy(destination, source);  // Копируем строку source в destination
+  strncpy(
+      destination, source,
+      8);  // Копируем строку source в destination, не включая нулевой символ
+
+  destination[sizeof(destination) - 1] =
+      '\0';  // Добавляем нулевой символ в конец
 
   printf("%s\n", destination);  // Вывод: Hello, World!
 
   return 0;
 }
+// int main() {
+//   char source[] = "Hello, World!";
+//   char destination[50];
+
+//   strcpy(destination, source);  // Копируем строку source в destination
+
+//   printf("%s\n", destination);  // Вывод: Hello, World!
+
+//   return 0;
+// }
 // int main() {
 //   char str1[] = "Hello, world!";
 //   char str2[] = "Hello, universe";

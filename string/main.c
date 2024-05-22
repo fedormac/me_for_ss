@@ -7,22 +7,28 @@ typedef struct {
 } CharInfo;
 size_t s21_str_len(char *str);
 void *s21_memchr(const void *_str, int c, size_t n);
-int s21_memcmp(const void *str1, const void *str2, size_t n);
+int s21_memcmp(const void *_str1, const void *_str2, size_t n);
 
 /*
 1
+2
 15
 
 */
 int main() {
-  char *str = "sdfsdfs";
+  char *str = "abc";
+  char *str2 = "abd";
+
   char *find;
   int i = 0;
-  int size;
+  int size, razn;
   size = s21_str_len(str);
   printf("%d\n", size);
   find = s21_memchr(str, ' ', s21_str_len(str));
-  printf("%ld\n", find - str);
+  // printf("%ld\n", find - str);
+  razn = s21_memcmp(str, str2, sizeof(str));
+  printf("%d\n", razn);
+
   return 0;
 }
 size_t s21_str_len(char *str) {
@@ -45,4 +51,26 @@ void *s21_memchr(const void *_str, int c, size_t n) {
     return NULL;
   }
 }
-int s21_memcmp(const void *str1, const void *str2, size_t n) { return 0; }
+int s21_memcmp(const void *_str1, const void *_str2, size_t n) {
+  const char *str1 = _str1, *str2 = _str2;
+  int *mas1, *mas2;
+  mas1 = calloc(n, sizeof(int));
+  mas2 = calloc(n, sizeof(int));
+  for (int i = 0; i < n; i++) {
+    mas1[i] = (int)str1[i];
+  }
+  for (int i = 0; i < n; i++) {
+    mas2[i] = (int)str2[i];
+  }
+
+  int i = 0;
+  while (mas1[i] == mas2[i] && i < n) {
+    i++;
+  }
+  int buff;
+  buff = mas1[i] - mas2[i];
+  free(mas1);
+  free(mas2);
+
+  return buff;
+}

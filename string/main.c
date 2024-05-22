@@ -13,6 +13,7 @@ void *s21_memcpy(void *_dest, const void *_src, size_t n);
 /*
 1
 2
+3
 15
 
 */

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str[] = "Привет, мир, Как, дела?";
+  char str[] = "Привет, мир! Как, дела?";
   char delimiters[] = ",.!?";
 
   char *token = strtok(str, delimiters);

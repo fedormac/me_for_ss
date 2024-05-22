@@ -25,6 +25,7 @@ char *s21_strpbrk(const char *str1, const char *str2);
 char *s21_strrchr(const char *str, int c);
 size_t s21_strspn(const char *str1, const char *str2);
 char *s21_strstr(const char *haystack, const char *needle);
+char *s21_strtok(char *str, const char *delim);
 /*
 1
 2
@@ -47,10 +48,10 @@ char *s21_strstr(const char *haystack, const char *needle);
 19
 */
 int main() {
-  char *str = "mss prod";
-  char *str2 = "mss";
+  //   char *str = "mss prod";
+  //   char *str2 = "mss";
 
-  char find[200];
+  //   char find[200];
   /*
   // int comparison_result = s21_strcmp(str, str2);  // printf("%d\n",
  comparison_result);
@@ -84,15 +85,53 @@ int main() {
   // size_t len = s21_strspn(str, str2);
   //     printf("Количество символов в начале строки, принадлежащих набору:
   //     %zu\n", len);
-  char *found = s21_strstr(str, str2);
+  //   char *found = s21_strstr(str, str2);
 
-  if (found != NULL) {
-    printf("Подстрока '%s' найдена в строке.\n", found);
-  } else {
-    printf("Подстрока '%s' не найдена в строке.\n", str2);
-  }
+  //   if (found != NULL) {
+  //     printf("Подстрока '%s' найдена в строке.\n", found);
+  //   } else {
+  //     printf("Подстрока '%s' не найдена в строке.\n", str2);
+  //   }
+
+  char str[] = "Привет, мир, Как, дела?";
+  char delimiters[] = ",.!?";
+
+  char *token = s21_strtok(str, delimiters);
+
+  //   while (token != NULL) {
+  //  printf("%s\n", token);
+  //     token = s21_strtok(NULL, delimiters);
+  //   }
+
   return 0;
 }
+char *s21_strtok(char *str, const char *delim) {
+  static char *_str = NULL;
+  static char *current_token = NULL;
+
+  if (_str == NULL) {
+    _str = calloc(1024, sizeof(char));  // Выделяем память под строку
+    if (_str == NULL) {
+      printf("Memory allocation failed\n");
+    }
+    s21_strcpy(_str, str);  // Копируем исходную строку в _str
+  }
+  // printf( "%s\n",_str);
+  if (current_token == NULL) {
+    current_token = s21_strtok(_str, delim);  // Разбиваем строку на токены
+  } else {
+    current_token = s21_strtok(NULL, delim);  // Получаем следующий токен
+  }
+
+  if (current_token == NULL) {
+    free(_str);  // Освобождаем память, если больше нет токенов
+    _str = NULL;
+    current_token = NULL;
+  }
+
+  return current_token;
+}
+
 char *s21_strstr(const char *haystack, const char *needle) {
   int i = 0, i2 = 0;
   int size = s21_str_len(needle), counter = 0;

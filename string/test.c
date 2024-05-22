@@ -3,15 +3,29 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str[] = "mss ";
-  char validChars[] = "mss prod";
-  size_t len = strspn(str, validChars);
+  char str[] = "mss1";
+  char substr[] = "prid mss";
 
-  printf("Количество символов в начале строки, принадлежащих набору: %zu\n",
-         len);
+  char *found = strstr(str, substr);
+
+  if (found != NULL) {
+    printf("Подстрока '%ld' найдена в строке.\n", found - substr);
+  } else {
+    printf("Подстрока '%s' не найдена в строке.\n", substr);
+  }
 
   return 0;
 }
+// int main() {
+//   char str[] = "mss ";
+//   char validChars[] = "mss prod";
+//   size_t len = strspn(str, validChars);
+
+//   printf("Количество символов в начале строки, принадлежащих набору: %zu\n",
+//          len);
+
+//   return 0;
+// }
 // int main() {
 //   char str[] = "mss prod rod";
 //   char *lastSpacePtr = strrchr(str, ' ');

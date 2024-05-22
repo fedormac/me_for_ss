@@ -24,6 +24,7 @@ char *s21_strerror(int errnum);
 char *s21_strpbrk(const char *str1, const char *str2);
 char *s21_strrchr(const char *str, int c);
 size_t s21_strspn(const char *str1, const char *str2);
+char *s21_strstr(const char *haystack, const char *needle);
 /*
 1
 2
@@ -43,10 +44,11 @@ size_t s21_strspn(const char *str1, const char *str2);
 16
 17
 18
+19
 */
 int main() {
-  char *str = "ms";
-  char *str2 = "mss prod";
+  char *str = "mss prod";
+  char *str2 = "mss";
 
   char find[200];
   /*
@@ -82,9 +84,35 @@ int main() {
   // size_t len = s21_strspn(str, str2);
   //     printf("Количество символов в начале строки, принадлежащих набору:
   //     %zu\n", len);
+  char *found = s21_strstr(str, str2);
 
+  if (found != NULL) {
+    printf("Подстрока '%s' найдена в строке.\n", found);
+  } else {
+    printf("Подстрока '%s' не найдена в строке.\n", str2);
+  }
   return 0;
 }
+char *s21_strstr(const char *haystack, const char *needle) {
+  int i = 0, i2 = 0;
+  int size = s21_str_len(needle), counter = 0;
+  while (haystack[i] != '\0') {
+    while (needle[i2] != '\0') {
+      if (haystack[i + i2] == needle[i2]) {
+        counter++;
+      }
+      if (counter == size) {
+        return (char *)needle;
+      }
+
+      i2++;
+    }
+    i2 = 0;
+
+    i++;
+  }
+}
+
 size_t s21_strspn(const char *str1, const char *str2) {
   int i = 0;
   size_t conter = 0;

@@ -20,7 +20,8 @@ int s21_strncmp(const char *str1, const char *str2, size_t n);
 char *s21_strcpy(char *dest, const char *src);
 char *s21_strncpy(char *dest, const char *src, size_t n);
 size_t s21_strcspn(const char *str1, const char *str2);
-// char *s21_strerror(int errnum);
+char *s21_strerror(int errnum);
+char *s21_strpbrk(const char *str1, const char *str2);
 /*
 1
 2
@@ -35,8 +36,9 @@ size_t s21_strcspn(const char *str1, const char *str2);
 11
 12
 13
-14 надо сделать косяк есть
+14 надо сделать косяк есть un err
 15
+16
 
 */
 int main() {
@@ -70,43 +72,57 @@ int main() {
 
   //   printf("Наибольший : '%ld'\n", len);
   // printf("%s", s21_strerror(10));
+  // char *sss=s21_strpbrk(str,str2);
+  // printf("Первый найденный символ '%c' находится на позиции %ld\n", *sss, sss
+  // - str);
+
   return 0;
 }
-// char *s21_strerror(int errnum)
-// {
-//   char line[100];
+char *s21_strerror(int errnum) {
+  static char line[100];
 
-//   char buff[20];
-//   char ss = (char)errnum;
-//   FILE *file = fopen("a.txt", "r");
-//   if (!file)
-//   {
-//     printf("Failed to open file for writing");
-//     return NULL;
-//   }
-//   int i = 0;
+  char buff[20];
+  char ss = (char)errnum;
+  FILE *file = fopen("a.txt", "r");
+  if (!file) {
+    printf("Failed to open file for writing");
+    return NULL;
+  }
+  int i = 0;
 
-//   while (fgets(line, sizeof(line), file))
-//   {
-//     while (line[i] != ':')
-//     {
-//       buff[i] = line[i];
-//       i++;
-//     }
-//     buff[i] = '\0';
+  while (fgets(line, sizeof(line), file)) {
+    while (line[i] != ':') {
+      buff[i] = line[i];
+      i++;
+    }
+    buff[i] = '\0';
 
-//     if (atoi(buff) == errnum)
-//     {
-//       return line;
-//       //(line (i+2))
-//     }
+    if (atoi(buff) == errnum) {
+      return (char *)line + (i + 2);
+      //(line (i+2))
+    }
 
-//     i = 0;
-//   }
-//   fclose(file);
+    i = 0;
+  }
+  fclose(file);
 
-// return "Unknown error " ;
-// }
+  return "Unknown error ";
+}
+char *s21_strpbrk(const char *str1, const char *str2) {
+  int i = 0, i2 = 0;
+  while (str1[i] != '\0') {
+    while (str2[i2] != '\0') {
+      if (str2[i2] == str1[i]) {
+        return (char *)&str1[i];
+      }
+      i2++;
+    }
+
+    i2 = 0;
+    i++;
+  }
+  return NULL;
+}
 
 size_t s21_strcspn(const char *str1, const char *str2) {
   int i = 0, i2 = 0;

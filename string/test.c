@@ -1,11 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
 
-//#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+int main() {
+  const char *str = "adgb!c";
+  const char *accept = ",!";
 
+  char *found = strpbrk(str, accept);
+
+  if (found) {
+    printf("Первый найденный символ '%c' находится на позиции %ld\n", *found,
+           found - str);
+  } else {
+    printf("Символов из набора '%s' не найдено\n", accept);
+  }
+
+  return 0;
+}
 // int main() {
 //     const char *source = "Hello, World!";
 //     char *copy = strdup(source);
@@ -21,25 +32,25 @@
 //     return 0;
 // }
 
-int main() {
-  FILE *file = fopen("a.txt", "w");
-  if (!file) {
-    perror("Failed to open file for writing");
-    return EXIT_FAILURE;
-  }
+// int main() {
+//   FILE *file = fopen("a.txt", "w");
+//   if (!file) {
+//     perror("Failed to open file for writing");
+//     return EXIT_FAILURE;
+//   }
 
-  for (int i = 1; i <= 134; ++i) {
-    char *error_msg = strerror(i);
-    if (error_msg != NULL) {
-      fprintf(file, "%d: %s\n", i, error_msg);
-    } else {
-      fprintf(file, "%d: No description available\n", i);
-    }
-  }
+//   for (int i = 1; i <= 134; ++i) {
+//     char *error_msg = strerror(i);
+//     if (error_msg != NULL) {
+//       fprintf(file, "%d: %s\n", i, error_msg);
+//     } else {
+//       fprintf(file, "%d: No description available\n", i);
+//     }
+//   }
 
-  fclose(file);
-  return EXIT_SUCCESS;
-}
+//   fclose(file);
+//   return EXIT_SUCCESS;
+// }
 // int main() {
 //     const char *str = "aaa,aaaaaa,";
 //     const char *bad_chars = "!?";

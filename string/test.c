@@ -2,19 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+typedef unsigned long s21_size_t;
+
 int main() {
-  char str[] = "Привет, мир! Как, дела?";
-  char delimiters[] = ",.!?";
-
-  char *token = strtok(str, delimiters);
-
-  while (token != NULL) {
-    printf("%s\n", token);
-    token = strtok(NULL, delimiters);
-  }
+  s21_size_t a = -5.4;
+  printf("%ld", a);
 
   return 0;
 }
+
+// int main() {
+//    char str[] = "Привет, мир! Как, дела?";
+//    char delimiters[] = ",.!?";
+
+//   char *token = strtok(str, delimiters);
+
+//   while (token != NULL) {
+//     printf("%s\n", token);
+//     token = strtok(NULL, delimiters);
+//   }
+
+//   return 0;
+// }
 // int main() {
 //   char str[] = "mss1";
 //   char substr[] = "prid mss";

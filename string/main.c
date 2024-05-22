@@ -1,29 +1,31 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#define s21_NULL (void *)0
+typedef unsigned long s21_size_t;
 typedef struct {
   int value;
   char name[40];
 
 } erreoz;
-size_t s21_str_len(const char *str);
-void *s21_memchr(const void *_str, int c, size_t n);
-int s21_memcmp(const void *_str1, const void *_str2, size_t n);
-void *s21_memcpy(void *_dest, const void *_src, size_t n);
-void *s21_memmove(void *_dest, const void *_src, size_t n);
-void *s21_memset(void *_str, int c, size_t n);
+s21_size_t s21_str_len(const char *str);
+void *s21_memchr(const void *_str, int c, s21_size_t n);
+int s21_memcmp(const void *_str1, const void *_str2, s21_size_t n);
+void *s21_memcpy(void *_dest, const void *_src, s21_size_t n);
+void *s21_memmove(void *_dest, const void *_src, s21_size_t n);
+void *s21_memset(void *_str, int c, s21_size_t n);
 char *s21_strcat(char *dest, const char *src);
-char *s21_strncat(char *dest, const char *src, size_t n);
+char *s21_strncat(char *dest, const char *src, s21_size_t n);
 char *s21_strchr(const char *str, int c);
 int s21_strcmp(const char *str1, const char *str2);
-int s21_strncmp(const char *str1, const char *str2, size_t n);
+int s21_strncmp(const char *str1, const char *str2, s21_size_t n);
 char *s21_strcpy(char *dest, const char *src);
-char *s21_strncpy(char *dest, const char *src, size_t n);
-size_t s21_strcspn(const char *str1, const char *str2);
+char *s21_strncpy(char *dest, const char *src, s21_size_t n);
+s21_size_t s21_strcspn(const char *str1, const char *str2);
 char *s21_strerror(int errnum);
 char *s21_strpbrk(const char *str1, const char *str2);
 char *s21_strrchr(const char *str, int c);
-size_t s21_strspn(const char *str1, const char *str2);
+s21_size_t s21_strspn(const char *str1, const char *str2);
 char *s21_strstr(const char *haystack, const char *needle);
 char *s21_strtok(char *str, const char *delim);
 /*
@@ -49,72 +51,27 @@ char *s21_strtok(char *str, const char *delim);
 20
 */
 int main() {
-  //   char *str = "mss prod";
-  //   char *str2 = "mss";
-
-  //   char find[200];
-  /*
-  // int comparison_result = s21_strcmp(str, str2);  // printf("%d\n",
- comparison_result);
-  // s21_strcat(find, str2);s21_strncat(find, str2,1);char *found =  //
- s21_strchr(str, 'z');
-  // printf("%s\n", find); find = calloc(200, sizeof(char));  find[0] = 'm';
- find[1] = 's';  find[2] = 'a'; find[3] = ' ';  int i = 0;  int size, razn; size
- = s21_str_len(str); printf("%d\n", size); find = s21_memchr(str, ' ',
- s21_str_len(str)); printf("%ld\n", find - str); razn = s21_memcmp(str, str2,
- sizeof(str)); printf("%d\n", razn);  s21_memcpy(find, str, sizeof(str));
- s21_memmove(find + 4, str, s21_str_len(str) + 1);  s21_memset(find, '*', 2);
- s21_memset(find + 2, ' ', 2); s21_memset(find + 4, '*', 2);
- */
-  // int comparison_result = s21_strncmp(str, str2, 5);
-  // printf("%d\n", comparison_result);
-  //   s21_strcpy(find, str2);
-  // printf("%s\n", find);
-  // s21_strncpy(find, str2, 8);
-
-  // find[sizeof(find) - 1] = '\0';
-
-  // printf("%s\n", find);  // Вывод: Hello, World!
-  // size_t len = s21_strcspn(str, str2);
-
-  //   printf("Наибольший : '%ld'\n", len);
-  // printf("%s", s21_strerror(10));
-  // char *sss=s21_strpbrk(str,str2);
-  // printf("Первый найденный символ '%c' находится на позиции %ld\n", *sss, sss
-  // - str);
-  // char *lastSpacePtr = s21_strrchr(str, 'z');
-  // size_t len = s21_strspn(str, str2);
-  //     printf("Количество символов в начале строки, принадлежащих набору:
-  //     %zu\n", len);
-  //   char *found = s21_strstr(str, str2);
-
-  //   if (found != NULL) {
-  //     printf("Подстрока '%s' найдена в строке.\n", found);
-  //   } else {
-  //     printf("Подстрока '%s' не найдена в строке.\n", str2);
-  //   }
-
   char str[] = "Привет, мир, Как, дела?";
   char delimiters[] = ",.!?";
 
   char *token = s21_strtok(str, delimiters);
 
-  while (token != NULL) {
+  while (token != s21_NULL) {
     printf("%s\n", token);
-    token = s21_strtok(NULL, delimiters);
+    token = s21_strtok(s21_NULL, delimiters);
   }
 
   return 0;
 }
 char *s21_strtok(char *str, const char *delim) {
-  static char *p = NULL;
-  if (str != NULL) p = str;
-  if (p == NULL) return NULL;
+  static char *p = s21_NULL;
+  if (str != s21_NULL) p = str;
+  if (p == s21_NULL) return s21_NULL;
   char *save = p;
   p += s21_strspn(p, delim);
   if (*p == '\0') {
-    p = NULL;
-    return NULL;
+    p = s21_NULL;
+    return s21_NULL;
   }
   char *token = p;
   p += s21_strcspn(p, delim);
@@ -144,9 +101,9 @@ char *s21_strstr(const char *haystack, const char *needle) {
   }
 }
 
-size_t s21_strspn(const char *str1, const char *str2) {
+s21_size_t s21_strspn(const char *str1, const char *str2) {
   int i = 0;
-  size_t conter = 0;
+  s21_size_t conter = 0;
   while (str2[i] != '\0' || str1[i] != '\0') {
     if (str2[i] != str1[i]) {
       break;
@@ -160,7 +117,7 @@ size_t s21_strspn(const char *str1, const char *str2) {
 }
 char *s21_strrchr(const char *str, int c) {
   int i = 0;
-  static char *buff = NULL;
+  static char *buff = s21_NULL;
   buff = malloc(10 * sizeof(char));
 
   while (str[i] != '\0') {
@@ -169,7 +126,7 @@ char *s21_strrchr(const char *str, int c) {
     }
     i++;
   }
-  return NULL;
+  return s21_NULL;
 }
 
 char *s21_strerror(int errnum) {
@@ -180,7 +137,7 @@ char *s21_strerror(int errnum) {
   FILE *file = fopen("a.txt", "r");
   if (!file) {
     printf("Failed to open file for writing");
-    return NULL;
+    return s21_NULL;
   }
   int i = 0;
 
@@ -215,12 +172,12 @@ char *s21_strpbrk(const char *str1, const char *str2) {
     i2 = 0;
     i++;
   }
-  return NULL;
+  return s21_NULL;
 }
 
-size_t s21_strcspn(const char *str1, const char *str2) {
+s21_size_t s21_strcspn(const char *str1, const char *str2) {
   int i = 0, i2 = 0;
-  size_t couter = 0;
+  s21_size_t couter = 0;
   while (str2[i] != '\0') {
     while (str1[i2] != '\0') {
       if (str1[i2] == str2[i]) {
@@ -239,7 +196,7 @@ size_t s21_strcspn(const char *str1, const char *str2) {
   return couter;
 }
 
-char *s21_strncpy(char *dest, const char *src, size_t n) {
+char *s21_strncpy(char *dest, const char *src, s21_size_t n) {
   int i = 0, size = s21_str_len(src) + 1;
   while (i != size && i < n) {
     dest[i] = src[i];
@@ -258,7 +215,7 @@ char *s21_strcpy(char *dest, const char *src) {
   return dest;
 }
 
-int s21_strncmp(const char *str1, const char *str2, size_t n) {
+int s21_strncmp(const char *str1, const char *str2, s21_size_t n) {
   int *mas1, *mas2;
   mas1 = calloc(s21_str_len(str1) + 1, sizeof(int));
   mas2 = calloc(s21_str_len(str1) + 1, sizeof(int));
@@ -315,12 +272,12 @@ char *s21_strchr(const char *str, int c) {
     i++;
   }
   if (str[i] == '\0') {
-    return (char *)NULL;
+    return (char *)s21_NULL;
   } else {
     return (char *)&str[i];
   }
 }
-char *s21_strncat(char *dest, const char *src, size_t n) {
+char *s21_strncat(char *dest, const char *src, s21_size_t n) {
   int i = 0, i2 = 0;
   while (dest[i] != '\0') {
     i++;
@@ -350,7 +307,7 @@ char *s21_strcat(char *dest, const char *src) {
   return dest;
 }
 
-void *s21_memset(void *_str, int c, size_t n) {
+void *s21_memset(void *_str, int c, s21_size_t n) {
   char *str = _str;
   int i = 0;
   while (i < n) {
@@ -360,7 +317,7 @@ void *s21_memset(void *_str, int c, size_t n) {
 
   return (void *)str;
 }
-void *s21_memmove(void *_dest, const void *_src, size_t n) {
+void *s21_memmove(void *_dest, const void *_src, s21_size_t n) {
   char *dest = _dest;
 
   const char *str = _src;
@@ -380,7 +337,7 @@ void *s21_memmove(void *_dest, const void *_src, size_t n) {
   return (void *)dest;
 }
 
-void *s21_memcpy(void *_dest, const void *_src, size_t n) {
+void *s21_memcpy(void *_dest, const void *_src, s21_size_t n) {
   char *dest = _dest;
   const char *str = _src;
   int i = 0;
@@ -392,7 +349,7 @@ void *s21_memcpy(void *_dest, const void *_src, size_t n) {
 
   return (void *)dest;
 }
-size_t s21_str_len(const char *str) {
+s21_size_t s21_str_len(const char *str) {
   int i = 0;
   while (str[i] != '\0') {
     i++;
@@ -400,7 +357,7 @@ size_t s21_str_len(const char *str) {
 
   return i;
 }
-void *s21_memchr(const void *_str, int c, size_t n) {
+void *s21_memchr(const void *_str, int c, s21_size_t n) {
   const char *str = _str;
   int i = 0;
   while (i <= n && str[i] != c) {
@@ -409,10 +366,10 @@ void *s21_memchr(const void *_str, int c, size_t n) {
   if (i < n) {
     return (void *)&str[i];
   } else {
-    return NULL;
+    return s21_NULL;
   }
 }
-int s21_memcmp(const void *_str1, const void *_str2, size_t n) {
+int s21_memcmp(const void *_str1, const void *_str2, s21_size_t n) {
   const char *str1 = _str1, *str2 = _str2;
   int *mas1, *mas2;
   mas1 = calloc(n, sizeof(int));

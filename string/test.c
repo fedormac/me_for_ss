@@ -1,22 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+//#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
+// int main() {
+//     const char *source = "Hello, World!";
+//     char *copy = strdup(source);
+
+//     if (copy!= NULL) {
+//         printf("Original string: %s\n", source);
+//         printf("Copied string: %s\n", copy);
+//         free(copy); // Не забываем освободить память
+//     } else {
+//         printf("Memory allocation failed.\n");
+//     }
+
+//     return 0;
+// }
+
 int main() {
-  char source[] = "Hello, World!";
-  char destination[50];
+  FILE *file = fopen("a.txt", "w");
+  if (!file) {
+    perror("Failed to open file for writing");
+    return EXIT_FAILURE;
+  }
 
-  strncpy(
-      destination, source,
-      8);  // Копируем строку source в destination, не включая нулевой символ
+  for (int i = 1; i <= 134; ++i) {
+    char *error_msg = strerror(i);
+    if (error_msg != NULL) {
+      fprintf(file, "%d: %s\n", i, error_msg);
+    } else {
+      fprintf(file, "%d: No description available\n", i);
+    }
+  }
 
-  destination[sizeof(destination) - 1] =
-      '\0';  // Добавляем нулевой символ в конец
-
-  printf("%s\n", destination);  // Вывод: Hello, World!
-
-  return 0;
+  fclose(file);
+  return EXIT_SUCCESS;
 }
+// int main() {
+//     const char *str = "aaa,aaaaaa,";
+//     const char *bad_chars = "!?";
+
+//     size_t len = strcspn(str, bad_chars);
+
+//     printf("Наибольший : '%ld'\n", len);
+
+//     return 0;
+// }
+// int main() {
+//   char source[] = "Hello, World!";
+//   char destination[50];
+
+//   strncpy(
+//       destination, source,
+//       8);  // Копируем строку source в destination, не включая нулевой символ
+
+//   destination[sizeof(destination) - 1] =
+//       '\0';  // Добавляем нулевой символ в конец
+
+//   printf("%s\n", destination);  // Вывод: Hello, World!
+
+//   return 0;
+// }
 // int main() {
 //   char source[] = "Hello, World!";
 //   char destination[50];

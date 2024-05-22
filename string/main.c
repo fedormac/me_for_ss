@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct {
-  char name[10];
   int value;
-} CharInfo;
+  char name[40];
+
+} erreoz;
 size_t s21_str_len(const char *str);
 void *s21_memchr(const void *_str, int c, size_t n);
 int s21_memcmp(const void *_str1, const void *_str2, size_t n);
@@ -18,6 +19,8 @@ int s21_strcmp(const char *str1, const char *str2);
 int s21_strncmp(const char *str1, const char *str2, size_t n);
 char *s21_strcpy(char *dest, const char *src);
 char *s21_strncpy(char *dest, const char *src, size_t n);
+size_t s21_strcspn(const char *str1, const char *str2);
+// char *s21_strerror(int errnum);
 /*
 1
 2
@@ -31,12 +34,14 @@ char *s21_strncpy(char *dest, const char *src, size_t n);
 10
 11
 12
+13
+14
 15
 
 */
 int main() {
-  char *str = "adgbc";
-  char *str2 = "Hello, World!";
+  char *str = "adgb!c";
+  char *str2 = ",!";
 
   char find[200];
   /*
@@ -56,14 +61,74 @@ int main() {
   // printf("%d\n", comparison_result);
   //   s21_strcpy(find, str2);
   // printf("%s\n", find);
-  s21_strncpy(find, str2, 8);
+  // s21_strncpy(find, str2, 8);
 
-  find[sizeof(find) - 1] = '\0';
+  // find[sizeof(find) - 1] = '\0';
 
-  printf("%s\n", find);  // Вывод: Hello, World!
+  // printf("%s\n", find);  // Вывод: Hello, World!
+  // size_t len = s21_strcspn(str, str2);
 
+  //   printf("Наибольший : '%ld'\n", len);
+  printf("%s", s21_strerror(10));
   return 0;
 }
+// char *s21_strerror(int errnum)
+// {
+//   char line[100];
+
+//   char buff[20];
+//   char ss = (char)errnum;
+//   FILE *file = fopen("a.txt", "r");
+//   if (!file)
+//   {
+//     printf("Failed to open file for writing");
+//     return NULL;
+//   }
+//   int i = 0;
+
+//   while (fgets(line, sizeof(line), file))
+//   {
+//     while (line[i] != ':')
+//     {
+//       buff[i] = line[i];
+//       i++;
+//     }
+//     buff[i] = '\0';
+
+//     if (atoi(buff) == errnum)
+//     {
+//       return line;
+//       //(line (i+2))
+//     }
+
+//     i = 0;
+//   }
+//   fclose(file);
+
+// return "Unknown error " ;
+// }
+
+size_t s21_strcspn(const char *str1, const char *str2) {
+  int i = 0, i2 = 0;
+  size_t couter = 0;
+  while (str2[i] != '\0') {
+    while (str1[i2] != '\0') {
+      if (str1[i2] == str2[i]) {
+        break;
+      }
+      couter++;
+      i2++;
+    }
+    if (str1[i2] == str2[i]) {
+      break;
+    }
+    couter = 0;
+    i++;
+    i2 = 0;
+  }
+  return couter;
+}
+
 char *s21_strncpy(char *dest, const char *src, size_t n) {
   int i = 0, size = s21_str_len(src) + 1;
   while (i != size && i < n) {

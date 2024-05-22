@@ -46,6 +46,7 @@ char *s21_strtok(char *str, const char *delim);
 17
 18
 19
+20
 */
 int main() {
   //   char *str = "mss prod";
@@ -98,38 +99,29 @@ int main() {
 
   char *token = s21_strtok(str, delimiters);
 
-  //   while (token != NULL) {
-  //  printf("%s\n", token);
-  //     token = s21_strtok(NULL, delimiters);
-  //   }
+  while (token != NULL) {
+    printf("%s\n", token);
+    token = s21_strtok(NULL, delimiters);
+  }
 
   return 0;
 }
 char *s21_strtok(char *str, const char *delim) {
-  static char *_str = NULL;
-  static char *current_token = NULL;
-
-  if (_str == NULL) {
-    _str = calloc(1024, sizeof(char));  // Выделяем память под строку
-    if (_str == NULL) {
-      printf("Memory allocation failed\n");
-    }
-    s21_strcpy(_str, str);  // Копируем исходную строку в _str
+  static char *p = NULL;
+  if (str != NULL) p = str;
+  if (p == NULL) return NULL;
+  char *save = p;
+  p += s21_strspn(p, delim);
+  if (*p == '\0') {
+    p = NULL;
+    return NULL;
   }
-  // printf( "%s\n",_str);
-  if (current_token == NULL) {
-    current_token = s21_strtok(_str, delim);  // Разбиваем строку на токены
-  } else {
-    current_token = s21_strtok(NULL, delim);  // Получаем следующий токен
+  char *token = p;
+  p += s21_strcspn(p, delim);
+  if (*p != '\0') {
+    *p++ = '\0';
   }
-
-  if (current_token == NULL) {
-    free(_str);  // Освобождаем память, если больше нет токенов
-    _str = NULL;
-    current_token = NULL;
-  }
-
-  return current_token;
+  return token;
 }
 
 char *s21_strstr(const char *haystack, const char *needle) {

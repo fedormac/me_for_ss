@@ -3,20 +3,33 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  const char *str = "adgb!c";
-  const char *accept = ",!";
+  char str[] = "mss prod rod";
+  char *lastSpacePtr = strrchr(str, ' ');
 
-  char *found = strpbrk(str, accept);
-
-  if (found) {
-    printf("Первый найденный символ '%c' находится на позиции %ld\n", *found,
-           found - str);
+  if (lastSpacePtr != NULL) {
+    printf("Последний пробел найден на позиции: %ld\n", lastSpacePtr - str);
   } else {
-    printf("Символов из набора '%s' не найдено\n", accept);
+    printf("Пробел не найден.\n");
   }
 
   return 0;
 }
+
+// int main() {
+//   const char *str = "adgb!c";
+//   const char *accept = ",!";
+
+//   char *found = strpbrk(str, accept);
+
+//   if (found) {
+//     printf("Первый найденный символ '%c' находится на позиции %ld\n", *found,
+//            found - str);
+//   } else {
+//     printf("Символов из набора '%s' не найдено\n", accept);
+//   }
+
+//   return 0;
+// }
 // int main() {
 //     const char *source = "Hello, World!";
 //     char *copy = strdup(source);

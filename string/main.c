@@ -22,6 +22,7 @@ char *s21_strncpy(char *dest, const char *src, size_t n);
 size_t s21_strcspn(const char *str1, const char *str2);
 char *s21_strerror(int errnum);
 char *s21_strpbrk(const char *str1, const char *str2);
+char *s21_strrchr(const char *str, int c);
 /*
 1
 2
@@ -39,10 +40,11 @@ char *s21_strpbrk(const char *str1, const char *str2);
 14 надо сделать косяк есть un err
 15
 16
+17
 
 */
 int main() {
-  char *str = "adgb!c";
+  char *str = "mss prod rod";
   char *str2 = ",!";
 
   char find[200];
@@ -75,9 +77,24 @@ int main() {
   // char *sss=s21_strpbrk(str,str2);
   // printf("Первый найденный символ '%c' находится на позиции %ld\n", *sss, sss
   // - str);
+  // char *lastSpacePtr = s21_strrchr(str, 'z');
 
   return 0;
 }
+char *s21_strrchr(const char *str, int c) {
+  int i = 0;
+  static char *buff = NULL;
+  buff = malloc(10 * sizeof(char));
+
+  while (str[i] != '\0') {
+    if (str[i] == c) {
+      buff = (char *)&str[i];
+    }
+    i++;
+  }
+  return NULL;
+}
+
 char *s21_strerror(int errnum) {
   static char line[100];
 

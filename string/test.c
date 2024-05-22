@@ -2,21 +2,37 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str1[] = "aaa";
-  char str2[] = "aab";
+  char str1[] = "Hello, world!";
+  char str2[] = "Hello, universe";
 
-  int comparison_result = strcmp(str1, str2);
-  printf("%d\n", comparison_result);
+  int comparison_result = strncmp(str1, str2, 5);
+
   if (comparison_result < 0) {
-    printf("str1 меньше str2\n");
+    printf("Первые 5 символов str1 меньше первых 5 символов str2\n");
   } else if (comparison_result > 0) {
-    printf("str1 больше str2\n");
+    printf("Первые 5 символов str1 больше первых 5 символов str2\n");
   } else {
-    printf("str1 и str2 равны\n");
+    printf("Первые 5 символов str1 и str2 равны\n");
   }
 
   return 0;
 }
+// int main() {
+//   char str1[] = "aaa";
+//   char str2[] = "aab";
+
+//   int comparison_result = strcmp(str1, str2);
+//   printf("%d\n", comparison_result);
+//   if (comparison_result < 0) {
+//     printf("str1 меньше str2\n");
+//   } else if (comparison_result > 0) {
+//     printf("str1 больше str2\n");
+//   } else {
+//     printf("str1 и str2 равны\n");
+//   }
+
+//   return 0;
+// }
 
 // int main() {
 //   char str[] = "qwert";

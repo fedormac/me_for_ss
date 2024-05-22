@@ -35,7 +35,7 @@ size_t s21_strcspn(const char *str1, const char *str2);
 11
 12
 13
-14
+14 надо сделать косяк есть
 15
 
 */
@@ -69,7 +69,7 @@ int main() {
   // size_t len = s21_strcspn(str, str2);
 
   //   printf("Наибольший : '%ld'\n", len);
-  printf("%s", s21_strerror(10));
+  // printf("%s", s21_strerror(10));
   return 0;
 }
 // char *s21_strerror(int errnum)

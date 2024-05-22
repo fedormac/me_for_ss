@@ -7,6 +7,7 @@ typedef struct {
 } CharInfo;
 size_t s21_str_len(char *str);
 void *s21_memchr(const void *_str, int c, size_t n);
+int s21_memcmp(const void *str1, const void *str2, size_t n);
 
 /*
 1
@@ -44,3 +45,4 @@ void *s21_memchr(const void *_str, int c, size_t n) {
     return NULL;
   }
 }
+int s21_memcmp(const void *str1, const void *str2, size_t n) { return 0; }

@@ -4,14 +4,28 @@
 int main() {
   char src[] = "Привет, мир!";
   char *dest;
-  // dest=calloc(20,sizeof(char));
+  dest = malloc(200 * sizeof(char));
+  dest = "mss ";
 
-  memcpy(dest, src, sizeof(src));  // Копируем всю строку src в dest
+  memmove(dest + 4, src,
+          strlen(src) + 1);  // Копируем оставшуюся часть строки src в dest
 
-  printf("Копированная строка: %s\n", dest);
+  printf("Измененная строка: %s\n", dest);
 
   return 0;
 }
+
+// int main() {
+//   char src[] = "Привет, мир!";
+//   char *dest;
+//   // dest=calloc(20,sizeof(char));
+
+//   memcpy(dest, src, sizeof(src));  // Копируем всю строку src в dest
+
+//   printf("Копированная строка: %s\n", dest);
+
+//   return 0;
+// }
 
 // int main() {
 //   char block1[] = "abc";

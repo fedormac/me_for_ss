@@ -9,11 +9,13 @@ size_t s21_str_len(char *str);
 void *s21_memchr(const void *_str, int c, size_t n);
 int s21_memcmp(const void *_str1, const void *_str2, size_t n);
 void *s21_memcpy(void *_dest, const void *_src, size_t n);
+void *s21_memmove(void *_dest, const void *_src, size_t n);
 
 /*
 1
 2
 3
+4
 15
 
 */
@@ -21,8 +23,12 @@ int main() {
   char *str = "adgbc";
   char *str2 = "abd";
 
-  char *find;
-  find = calloc(6, sizeof(char));
+  char find[200];
+  // find = calloc(200, sizeof(char));
+  find[0] = 'm';
+  find[1] = 's';
+  find[2] = 'a';
+  find[3] = ' ';
   int i = 0;
   int size, razn;
   // size = s21_str_len(str);
@@ -31,11 +37,32 @@ int main() {
   //  printf("%ld\n", find - str);
   // razn = s21_memcmp(str, str2, sizeof(str));
   // printf("%d\n", razn);
-  s21_memcpy(find, str, sizeof(str));
+  // s21_memcpy(find, str, sizeof(str));
+  s21_memmove(find + 4, str, s21_str_len(str) + 1);
   printf("%s\n", find);
 
   return 0;
 }
+void *s21_memmove(void *_dest, const void *_src, size_t n) {
+  char *dest = _dest;
+
+  const char *str = _src;
+  int i = 0;
+  while (dest[i] != '\0') {
+    i++;
+  }
+  dest[i] != ' ';
+  printf("%s\n", dest);
+
+  while (i < n + 1) {
+    dest[i] = str[i];
+
+    i++;
+  }
+
+  return (void *)dest;
+}
+
 void *s21_memcpy(void *_dest, const void *_src, size_t n) {
   char *dest = _dest;
   const char *str = _src;

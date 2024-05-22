@@ -23,6 +23,7 @@ size_t s21_strcspn(const char *str1, const char *str2);
 char *s21_strerror(int errnum);
 char *s21_strpbrk(const char *str1, const char *str2);
 char *s21_strrchr(const char *str, int c);
+size_t s21_strspn(const char *str1, const char *str2);
 /*
 1
 2
@@ -41,11 +42,11 @@ char *s21_strrchr(const char *str, int c);
 15
 16
 17
-
+18
 */
 int main() {
-  char *str = "mss prod rod";
-  char *str2 = ",!";
+  char *str = "ms";
+  char *str2 = "mss prod";
 
   char find[200];
   /*
@@ -78,8 +79,25 @@ int main() {
   // printf("Первый найденный символ '%c' находится на позиции %ld\n", *sss, sss
   // - str);
   // char *lastSpacePtr = s21_strrchr(str, 'z');
+  // size_t len = s21_strspn(str, str2);
+  //     printf("Количество символов в начале строки, принадлежащих набору:
+  //     %zu\n", len);
 
   return 0;
+}
+size_t s21_strspn(const char *str1, const char *str2) {
+  int i = 0;
+  size_t conter = 0;
+  while (str2[i] != '\0' || str1[i] != '\0') {
+    if (str2[i] != str1[i]) {
+      break;
+    } else {
+      conter++;
+      i++;
+    }
+  }
+
+  return conter;
 }
 char *s21_strrchr(const char *str, int c) {
   int i = 0;

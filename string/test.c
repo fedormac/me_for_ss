@@ -3,17 +3,27 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str[] = "mss prod rod";
-  char *lastSpacePtr = strrchr(str, ' ');
+  char str[] = "mss ";
+  char validChars[] = "mss prod";
+  size_t len = strspn(str, validChars);
 
-  if (lastSpacePtr != NULL) {
-    printf("Последний пробел найден на позиции: %ld\n", lastSpacePtr - str);
-  } else {
-    printf("Пробел не найден.\n");
-  }
+  printf("Количество символов в начале строки, принадлежащих набору: %zu\n",
+         len);
 
   return 0;
 }
+// int main() {
+//   char str[] = "mss prod rod";
+//   char *lastSpacePtr = strrchr(str, ' ');
+
+//   if (lastSpacePtr != NULL) {
+//     printf("Последний пробел найден на позиции: %ld\n", lastSpacePtr - str);
+//   } else {
+//     printf("Пробел не найден.\n");
+//   }
+
+//   return 0;
+// }
 
 // int main() {
 //   const char *str = "adgb!c";

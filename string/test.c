@@ -1,23 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 int main() {
-  char buffer[50];
+  char str1[50] = "Hello, ";
+  char str2[] = "World";
 
-  // Заполняем весь буфер нулями
-  memset(buffer, 0, sizeof(buffer));
+  strcat(str1, str2);  // Конкатенируем str2 к str1
 
-  // Заполняем первые 5 символов пробелами
-  memset(buffer, ' ', 5);
-
-  // Заполняем последние 5 символов символом '*'
-  memset(buffer + 5, '*', 5);
-
-  printf("%s\n", buffer);
+  printf("%s\n", str1);  // Вывод: Hello, World!
 
   return 0;
 }
+// int main() {
+//   char buffer[50];
+
+//   // Заполняем весь буфер нулями
+//   memset(buffer, 0, sizeof(buffer));
+
+//   // Заполняем первые 5 символов пробелами
+//   memset(buffer, ' ', 5);
+
+//   // Заполняем последние 5 символов символом '*'
+//   memset(buffer + 5, '*', 5);
+
+//   printf("%s\n", buffer);
+
+//   return 0;
+// }
 // int main() {
 //   char src[] = "Привет, мир!";
 //   char *dest;

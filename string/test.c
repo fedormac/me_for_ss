@@ -2,20 +2,37 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str[] = "qwert";
-  char ch = 'w';
+  char str1[] = "aaa";
+  char str2[] = "aab";
 
-  char *found = strchr(str, ch);
-
-  if (found != NULL) {
-    printf("Первое вхождение '%c' находится на позиции %ld.\n", ch,
-           found - str);
+  int comparison_result = strcmp(str1, str2);
+  printf("%d\n", comparison_result);
+  if (comparison_result < 0) {
+    printf("str1 меньше str2\n");
+  } else if (comparison_result > 0) {
+    printf("str1 больше str2\n");
   } else {
-    printf("Символ '%c' не найден.\n", ch);
+    printf("str1 и str2 равны\n");
   }
 
   return 0;
 }
+
+// int main() {
+//   char str[] = "qwert";
+//   char ch = 'w';
+
+//   char *found = strchr(str, ch);
+
+//   if (found != NULL) {
+//     printf("Первое вхождение '%c' находится на позиции %ld.\n", ch,
+//            found - str);
+//   } else {
+//     printf("Символ '%c' не найден.\n", ch);
+//   }
+
+//   return 0;
+// }
 
 // int main() {
 //   char str1[50] = "Hello, ";

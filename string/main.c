@@ -5,7 +5,7 @@ typedef struct {
   char name[10];
   int value;
 } CharInfo;
-size_t s21_str_len(char *str);
+size_t s21_str_len(const char *str);
 void *s21_memchr(const void *_str, int c, size_t n);
 int s21_memcmp(const void *_str1, const void *_str2, size_t n);
 void *s21_memcpy(void *_dest, const void *_src, size_t n);
@@ -14,6 +14,7 @@ void *s21_memset(void *_str, int c, size_t n);
 char *s21_strcat(char *dest, const char *src);
 char *s21_strncat(char *dest, const char *src, size_t n);
 char *s21_strchr(const char *str, int c);
+int s21_strcmp(const char *str1, const char *str2);
 /*
 1
 2
@@ -23,15 +24,17 @@ char *s21_strchr(const char *str, int c);
 6
 7
 8
+9
 15
 
 */
 int main() {
   char *str = "adgbc";
-  char *str2 = "abdprod";
+  char *str2 = "adgbd";
 
   char find[200] = "mss ";
-
+  // int comparison_result = s21_strcmp(str, str2);
+  // printf("%d\n", comparison_result);
   // s21_strcat(find, str2);s21_strncat(find, str2,1);char *found =
   // s21_strchr(str, 'z');
   // printf("%s\n", find);
@@ -46,6 +49,32 @@ int main() {
  */
   return 0;
 }
+int s21_strcmp(const char *str1, const char *str2) {
+  int *mas1, *mas2;
+  mas1 = calloc(s21_str_len(str1) + 1, sizeof(int));
+  mas2 = calloc(s21_str_len(str1) + 1, sizeof(int));
+  for (int i = 0; i < s21_str_len(str1) + 1; i++) {
+    mas1[i] = (int)str1[i];
+  }
+  for (int i = 0; i < s21_str_len(str1) + 1; i++) {
+    mas2[i] = (int)str2[i];
+  }
+  //   for (int i = 0; i < s21_str_len(str1)+1; i++) {
+  //  printf("%d\n",mas1[i] ) ;
+  // }
+
+  int i = 0;
+  while (mas1[i] == mas2[i] && i < s21_str_len(str1)) {
+    i++;
+  }
+  int buff;
+  buff = mas1[i] - mas2[i];
+  free(mas1);
+  free(mas2);
+
+  return buff;
+}
+
 char *s21_strchr(const char *str, int c) {
   int i = 0;
   while (str[i] != c && str[i] != '\0') {
@@ -129,7 +158,7 @@ void *s21_memcpy(void *_dest, const void *_src, size_t n) {
 
   return (void *)dest;
 }
-size_t s21_str_len(char *str) {
+size_t s21_str_len(const char *str) {
   int i = 0;
   while (str[i] != '\0') {
     i++;

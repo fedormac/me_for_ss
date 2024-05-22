@@ -1,22 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 int main() {
-  char str1[] = "Hello, world!";
-  char str2[] = "Hello, universe";
+  char source[] = "Hello, World!";
+  char destination[50];
 
-  int comparison_result = strncmp(str1, str2, 5);
+  strcpy(destination, source);  // Копируем строку source в destination
 
-  if (comparison_result < 0) {
-    printf("Первые 5 символов str1 меньше первых 5 символов str2\n");
-  } else if (comparison_result > 0) {
-    printf("Первые 5 символов str1 больше первых 5 символов str2\n");
-  } else {
-    printf("Первые 5 символов str1 и str2 равны\n");
-  }
+  printf("%s\n", destination);  // Вывод: Hello, World!
 
   return 0;
 }
+// int main() {
+//   char str1[] = "Hello, world!";
+//   char str2[] = "Hello, universe";
+
+//   int comparison_result = strncmp(str1, str2, 5);
+
+//   if (comparison_result < 0) {
+//     printf("Первые 5 символов str1 меньше первых 5 символов str2\n");
+//   } else if (comparison_result > 0) {
+//     printf("Первые 5 символов str1 больше первых 5 символов str2\n");
+//   } else {
+//     printf("Первые 5 символов str1 и str2 равны\n");
+//   }
+
+//   return 0;
+// }
 // int main() {
 //   char str1[] = "aaa";
 //   char str2[] = "aab";

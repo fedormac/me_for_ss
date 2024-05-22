@@ -16,6 +16,7 @@ char *s21_strncat(char *dest, const char *src, size_t n);
 char *s21_strchr(const char *str, int c);
 int s21_strcmp(const char *str1, const char *str2);
 int s21_strncmp(const char *str1, const char *str2, size_t n);
+char *s21_strcpy(char *dest, const char *src);
 /*
 1
 2
@@ -27,14 +28,15 @@ int s21_strncmp(const char *str1, const char *str2, size_t n);
 8
 9
 10
+11
 15
 
 */
 int main() {
   char *str = "adgbc";
-  char *str2 = "adgbd";
+  char *str2 = "adgbd1";
 
-  char find[200] = "mss ";
+  char find[200];
   /*
   // int comparison_result = s21_strcmp(str, str2);  // printf("%d\n",
  comparison_result);
@@ -48,10 +50,22 @@ int main() {
  s21_memmove(find + 4, str, s21_str_len(str) + 1);  s21_memset(find, '*', 2);
  s21_memset(find + 2, ' ', 2); s21_memset(find + 4, '*', 2);
  */
-  int comparison_result = s21_strncmp(str, str2, 5);
-  printf("%d\n", comparison_result);
+  // int comparison_result = s21_strncmp(str, str2, 5);
+  // printf("%d\n", comparison_result);
+  //   s21_strcpy(find, str2);
+  // printf("%s\n", find);
   return 0;
 }
+char *s21_strcpy(char *dest, const char *src) {
+  int i = 0, size = s21_str_len(src) + 1;
+  while (i != size) {
+    dest[i] = src[i];
+    i++;
+  }
+
+  return dest;
+}
+
 int s21_strncmp(const char *str1, const char *str2, size_t n) {
   int *mas1, *mas2;
   mas1 = calloc(s21_str_len(str1) + 1, sizeof(int));

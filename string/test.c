@@ -2,15 +2,31 @@
 #include <stdlib.h>
 #include <string.h>
 int main() {
-  char str1[50] = "Hello, ";
-  char str2[] = "World";
+  char str[] = "qwert";
+  char ch = 'w';
 
-  strncat(str1, str2, 6);  // Конкатенируем первые 6 символов str2 к str1
+  char *found = strchr(str, ch);
 
-  printf("%s\n", str1);  // Вывод: Hello, Worl
+  if (found != NULL) {
+    printf("Первое вхождение '%c' находится на позиции %ld.\n", ch,
+           found - str);
+  } else {
+    printf("Символ '%c' не найден.\n", ch);
+  }
 
   return 0;
 }
+
+// int main() {
+//   char str1[50] = "Hello, ";
+//   char str2[] = "World";
+
+//   strncat(str1, str2, 6);  // Конкатенируем первые 6 символов str2 к str1
+
+//   printf("%s\n", str1);  // Вывод: Hello, Worl
+
+//   return 0;
+// }
 // int main() {
 //   char str1[50] = "Hello, ";
 //   char str2[] = "World";

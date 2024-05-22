@@ -1,19 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 int main() {
-  char src[] = "Привет, мир!";
-  char *dest;
-  dest = malloc(200 * sizeof(char));
-  dest = "mss ";
+  char buffer[50];
 
-  memmove(dest + 4, src,
-          strlen(src) + 1);  // Копируем оставшуюся часть строки src в dest
+  // Заполняем весь буфер нулями
+  memset(buffer, 0, sizeof(buffer));
 
-  printf("Измененная строка: %s\n", dest);
+  // Заполняем первые 5 символов пробелами
+  memset(buffer, ' ', 5);
+
+  // Заполняем последние 5 символов символом '*'
+  memset(buffer + 5, '*', 5);
+
+  printf("%s\n", buffer);
 
   return 0;
 }
+// int main() {
+//   char src[] = "Привет, мир!";
+//   char *dest;
+//   dest = malloc(200 * sizeof(char));
+//   dest = "mss ";
+
+//   memmove(dest + 4, src,
+//           strlen(src) + 1);  // Копируем оставшуюся часть строки src в dest
+
+//   printf("Измененная строка: %s\n", dest);
+
+//   return 0;
+// }
 
 // int main() {
 //   char src[] = "Привет, мир!";

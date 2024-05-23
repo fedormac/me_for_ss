@@ -7,15 +7,11 @@
 #define true 1
 #define false 0
 typedef unsigned long s21_size_t;
-
-typedef struct bool {
-  int bool;
-}
-bool;
+typedef int bool;
 
 void process(char *str2, const char *format, ...) {
   va_list args;
-  bool a = true;
+
   va_start(args, format);
   int i = 0;
   int counter = 0;

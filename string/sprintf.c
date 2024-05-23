@@ -6,20 +6,18 @@
 #define s21_NULL (void *)0
 typedef unsigned long s21_size_t;
 
-void process_strings_and_chars(char *str2, const char *format, ...) {
+void process(char *str2, const char *format, ...) {
   va_list args;
   va_start(args, format);
   int i = 0;
   int counter = 0;
   while (format[i] != '\0') {
-    i++;
-    if (format[i] != '%' && format[i] != '\0') {
-      switch (format[i]) {
+    if (format[i] == '%' && format[i] != '\0') {
+      switch (format[i + 1]) {
         case 's': {  // Обработка строк
           char *str = (char *)va_arg(args, char *);
-          // strcat(str2, str);
-          strncat(str2, str, counter);
-          counter = counter + strlen(str) - 1;
+
+          strcat(str2, str);
 
           printf("Строка: %s\n", str);
           break;
@@ -30,10 +28,13 @@ void process_strings_and_chars(char *str2, const char *format, ...) {
           while (str2[i2] != '\0') {
             i2++;
           }
-          i2--;
-          str2[i2] = ch;
+
+          str2[i2] = ' ';
+          str2[i2++] = ch;
           str2[i2++] = '\0';
           i2 = 0;
+
+          printf("\n%s\n", str2);
 
           printf("Символ: %c\n", ch);
           break;
@@ -41,13 +42,37 @@ void process_strings_and_chars(char *str2, const char *format, ...) {
         case 'd':
         case 'i': {  // Обработка цифра
           int ch = (int)va_arg(args, int);
+          int i2 = 0;
+          while (str2[i2] != '\0') {
+            i2++;
+          }
 
+          str2[i2] = ' ';
+
+          sprintf(&str2[i2++], "%d", ch);
+          // str2[i2++] = '\0';
+
+          i2 = 0;
           printf("цифра: %d\n", ch);
           break;
         }
         default:
           printf("Неизвестный формат: %c\n", *format - 1);
       }
+      i++;
+    }
+    i++;
+    if (format[i] != '%') {
+      char ch2 = format[i];
+      int i2 = 0;
+      while (str2[i2] != '\0') {
+        i2++;
+      }
+
+      str2[i2] = ' ';
+      str2[i2++] = ch2;
+      str2[i2++] = '\0';
+      i2 = 0;
     }
   }
 
@@ -57,7 +82,7 @@ void process_strings_and_chars(char *str2, const char *format, ...) {
 int main() {
   char mss[100];
 
-  process_strings_and_chars(mss, "%s%s", "Hello ", "World!");
+  process(mss, "sss%smss%sprod%c%d %i", "Hello ", "World!", 'w', 500, 1000);
   printf("\n%s\n", mss);
   return 0;
 }

@@ -1,18 +1,81 @@
 
+#include <ctype.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-typedef unsigned long s21_size_t;
-int main() {
-  char dest[200] = "pii";
-  char src[] = " prod!";
-  char src1[] = " mss";
-  strcat(dest, src);  // Добавляем " prod!" к "pii"
-  strcat(dest, src1);  // Добавляем " mss" к получившейся строке
-  printf("%s", dest);
 
+#define s21_NULL (void *)0
+#define true 1
+#define false 0
+typedef unsigned long s21_size_t;
+typedef int bool;
+
+int pizdos(char *str, const char *format) {
+  int i = 0;
+  char str2[20] = "";  // Инициализируем как пустую строку
+  while (format[i] != '%' && format[i] != '\0') {
+    str2[i] = format[i];
+    i++;
+  }
+  str2[i] = '\0';  // Завершаем строку нулевым символом
+  return i;
+}
+
+void process(char *str2, const char *format, ...) {
+  va_list args;
+  va_start(args, format);
+  int i = 0;
+  while (format[i] != '\0') {
+    if (format[i] == '%' && format[i + 1] != '\0') {
+      i++;  // Увеличиваем i, чтобы пропустить символ %
+      switch (format[i]) {
+        case 's':  // Обработка строк
+          char *str = va_arg(args, char *);
+          strcat(str2, str);
+          printf("Строка: %s\n", str);
+          break;
+        case 'c':  // Обработка символов
+          char ch = va_arg(args, int);
+          strcat(str2, &ch);
+          printf("Символ: %c\n", ch);
+          break;
+        case 'd':  // Обработка целых чисел
+          int num = va_arg(args, int);
+          char buffer[50];
+          sprintf(buffer, "%d", num);
+          strcat(str2, buffer);
+          printf("Целое число: %d\n", num);
+          break;
+        default:
+          i += pizdos(str2, &format[i]);
+      }
+    } else {
+      char ch = format[i];
+      strcat(str2, &ch);
+    }
+    i++;
+  }
+  va_end(args);
+}
+
+int main() {
+  char mss[1000] = "";
+  process(mss, "sss%smss%sprod%c%d %i", "Hello ", "World!", 'w', 500, 1000);
+  printf("\n%s\n", mss);
   return 0;
 }
+// typedef unsigned long s21_size_t;
+// int main() {
+//   char dest[200] = "pii";
+//   char src[] = " prod!";
+//   char src1[] = " mss";
+//   strcat(dest, src);  // Добавляем " prod!" к "pii"
+//   strcat(dest, src1);  // Добавляем " mss" к получившейся строке
+//   printf("%s", dest);
+
+//   return 0;
+// }
 // int main() {
 //   s21_size_t a = -5.4;
 //   printf("%ld", a);

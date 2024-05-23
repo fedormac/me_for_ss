@@ -8,6 +8,20 @@
 #define false 0
 typedef unsigned long s21_size_t;
 typedef int bool;
+char int_to_char(int digit) { return '0' + digit; }
+
+int pizdos(char *str, const char *format) {
+  int i = 0;
+  char str2[20];
+  while (format[i] != '%' || format[i] != '\0') {
+    // str2[i] = format[i];
+
+    i++;
+  }
+  i = 0;
+  printf("%s", format);
+  return i;
+}
 
 void process(char *str2, const char *format, ...) {
   va_list args;
@@ -17,6 +31,8 @@ void process(char *str2, const char *format, ...) {
   int counter = 0;
   while (format[i] != '\0') {
     if (format[i] == '%' && format[i] != '\0') {
+      printf("%c\n", (char)format[i + 1]);
+
       switch (format[i + 1]) {
         case 's': {  // Обработка строк
           char *str = (char *)va_arg(args, char *);
@@ -38,8 +54,6 @@ void process(char *str2, const char *format, ...) {
           str2[i2++] = '\0';
           i2 = 0;
 
-          printf("\n%s\n", str2);
-
           printf("Символ: %c\n", ch);
           break;
         }
@@ -52,18 +66,19 @@ void process(char *str2, const char *format, ...) {
           }
 
           str2[i2] = ' ';
-
-          sprintf(&str2[i2++], "%d", ch);
-          // str2[i2++] = '\0';
+          str2[i2] = int_to_char(ch);
+          str2[i2++] = '\0';
 
           i2 = 0;
           printf("цифра: %d\n", ch);
           break;
         }
         default:
-          printf("Неизвестный формат: %c\n", *format - 1);
+          i += pizdos(str2, &format[i + 1]);
+          // printf("Неизвестный формат: %c\n", *format - 1);
       }
-      i++;
+
+      i += 2;
     }
     i++;
     if (format[i] != '%') {
@@ -84,46 +99,9 @@ void process(char *str2, const char *format, ...) {
 }
 
 int main() {
-  char mss[100];
+  char mss[1000];
 
-  process(mss, "sss%smss%sprod%c%d %i", "Hello ", "World!", 'w', 500, 1000);
+  process(mss, "%smss%sprod%c%d %i ", "Hello ", "World!", 'w', 500, 1000, 140);
   printf("\n%s\n", mss);
   return 0;
 }
-// void print_values(int count,...) {
-//     va_list args;
-//     va_start(args, count);
-
-//     for (int i = 0; i < count; ++i) {
-//         int value = va_arg(args, int);
-//         printf("%d ", value);
-//     }
-
-//     va_end(args);
-// }
-
-// int main() {
-//     print_values(3, 10, 20, 30);
-//     return 0;
-// }
-
-// int sprintf(char *str, const char *format, ...) ;
-// int main(){
-// sprintf("sdf","%s","hjgfg");
-//     return 0;
-
-// }
-
-// int sprintf(char *str, const char *format, ...) {
-//     va_list args;
-//     char *ss;
-//     ss=malloc(sizeof(char)*100);
-//     va_start(args,format);
-//     while (args!='\0')
-//     {
-
-//        printf("%d",1);
-//     }
-
-// return 0;
-// }

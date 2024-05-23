@@ -3,28 +3,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define s21_NULL (void*)0
+#define s21_NULL (void *)0
 typedef unsigned long s21_size_t;
 
-void process_strings_and_chars(const char* format, ...) {
+void process_strings_and_chars(char *str2, const char *format, ...) {
   va_list args;
   va_start(args, format);
+  int i = 0;
+  int counter = 0;
+  while (format[i] != '\0') {
+    i++;
+    if (format[i] != '%' && format[i] != '\0') {
+      switch (format[i]) {
+        case 's': {  // Обработка строк
+          char *str = (char *)va_arg(args, char *);
+          // strcat(str2, str);
+          strncat(str2, str, counter);
+          counter = counter + strlen(str) - 1;
 
-  while (*format != '\0') {
-    switch (*format++) {
-      case 's': {  // Обработка строк
-        char* str = va_arg(args, char*);
-        printf("Строка: %s\n", str);
-        break;
+          printf("Строка: %s\n", str);
+          break;
+        }
+        case 'c': {  // Обработка символов
+          char ch = (char)va_arg(args, int);
+          int i2 = 0;
+          while (str2[i2] != '\0') {
+            i2++;
+          }
+          i2--;
+          str2[i2] = ch;
+          str2[i2++] = '\0';
+          i2 = 0;
+
+          printf("Символ: %c\n", ch);
+          break;
+        }
+        case 'd':
+        case 'i': {  // Обработка цифра
+          int ch = (int)va_arg(args, int);
+
+          printf("цифра: %d\n", ch);
+          break;
+        }
+        default:
+          printf("Неизвестный формат: %c\n", *format - 1);
       }
-      case 'c': {  // Обработка символов
-        char ch = (char)va_arg(args, int);  // Приведение типа, так как va_arg
-                                            // требует полностью описанных типов
-        printf("Символ: %c\n", ch);
-        break;
-      }
-      default:
-        printf("Неизвестный формат: %c\n", *format - 1);
     }
   }
 
@@ -32,7 +55,10 @@ void process_strings_and_chars(const char* format, ...) {
 }
 
 int main() {
-  process_strings_and_chars("scs", "Hello", 'W', "World!");
+  char mss[100];
+
+  process_strings_and_chars(mss, "%s%s", "Hello ", "World!");
+  printf("\n%s\n", mss);
   return 0;
 }
 // void print_values(int count,...) {

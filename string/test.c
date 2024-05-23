@@ -3,13 +3,22 @@
 #include <stdlib.h>
 #include <string.h>
 typedef unsigned long s21_size_t;
-
 int main() {
-  s21_size_t a = -5.4;
-  printf("%ld", a);
+  char dest[200] = "pii";
+  char src[] = " prod!";
+  char src1[] = " mss";
+  strcat(dest, src);  // Добавляем " prod!" к "pii"
+  strcat(dest, src1);  // Добавляем " mss" к получившейся строке
+  printf("%s", dest);
 
   return 0;
 }
+// int main() {
+//   s21_size_t a = -5.4;
+//   printf("%ld", a);
+
+//   return 0;
+// }
 
 // int main() {
 //    char str[] = "Привет, мир! Как, дела?";

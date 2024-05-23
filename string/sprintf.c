@@ -4,7 +4,13 @@
 #include <stdlib.h>
 #include <string.h>
 #define s21_NULL (void *)0
+#define true 1
+#define false 0
 typedef unsigned long s21_size_t;
+
+typedef struct {
+  int;
+} bool;
 
 void process(char *str2, const char *format, ...) {
   va_list args;

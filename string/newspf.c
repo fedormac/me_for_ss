@@ -8,6 +8,8 @@
 #define false 0
 typedef unsigned long s21_size_t;
 typedef int bool;
+char int_to_char(int digit) { return '0' + digit; }
+
 void process(char *str2, const char *format, ...) {
   va_list args;
   va_start(args, format);
@@ -31,12 +33,22 @@ void process(char *str2, const char *format, ...) {
       switch (format[i + 1]) {
         case 's': {  // Обработка строк
           char *str = (char *)va_arg(args, char *);
+          strcat(str2, str);
           printf("Строка: %s\n", str);
 
           break;
         }
         case 'c': {  // Обработка символов
           char ch = (char)va_arg(args, int);
+          int i2 = 0;
+          while (str2[i2] != '\0') {
+            i2++;
+          }
+
+          str2[i2] = ' ';
+          str2[i2++] = ch;
+          str2[i2++] = '\0';
+          i2 = 0;
           printf("Символ: %c\n", ch);
 
           break;
@@ -44,6 +56,16 @@ void process(char *str2, const char *format, ...) {
         case 'd':
         case 'i': {  // Обработка цифра
           int ch = (int)va_arg(args, int);
+          int i2 = 0;
+          while (str2[i2] != '\0') {
+            i2++;
+          }
+
+          str2[i2] = ' ';
+          str2[i2] = int_to_char(ch);
+          str2[i2++] = '\0';
+
+          i2 = 0;
           printf("цифра: %d\n", ch);
 
           break;

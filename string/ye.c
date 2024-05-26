@@ -60,7 +60,7 @@ void prod(double num, char *ss) {
     printf("%f", num);
   }
   printf(" %d ", zdvig);
-  ftoa(num, ss, 9);
+  ftoa(num, ss, 7);
 }
 int main() {
   double number = 0.00012345;

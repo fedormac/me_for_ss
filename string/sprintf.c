@@ -74,13 +74,13 @@ void process(char *str2, const char *format, ...) {
           break;
         }
         default:
-          i += pizdos(str2, &format[i + 1]);
+          // i += pizdos(str2, &format[i + 1]);
           // printf("Неизвестный формат: %c\n", *format - 1);
       }
 
       i += 2;
     }
-    i++;
+
     if (format[i] != '%') {
       char ch2 = format[i];
       int i2 = 0;
@@ -93,6 +93,7 @@ void process(char *str2, const char *format, ...) {
       str2[i2++] = '\0';
       i2 = 0;
     }
+    i++;
   }
 
   va_end(args);
@@ -101,7 +102,7 @@ void process(char *str2, const char *format, ...) {
 int main() {
   char mss[1000];
 
-  process(mss, "%smss%sprod%c%d %i ", "Hello ", "World!", 'w', 500, 1000, 140);
+  process(mss, "%smss%sprod%c %d %i ", "Hello ", "World!", 'w', 500, 1000);
   printf("\n%s\n", mss);
   return 0;
 }

@@ -8,8 +8,18 @@
 #define false 0
 typedef unsigned long s21_size_t;
 typedef int bool;
+
 char int_to_char(int digit) { return '0' + digit; }
 
+void foo(va_list *arg) {
+  va_list cp;
+  va_copy(cp, *arg);
+  int ch = (int)va_arg(*arg, int);
+  // int ch2 = (int)va_arg(*arg, int);
+  va_copy(*arg, cp);
+
+  printf("%dffff", ch);
+}
 void process(char *str2, const char *format, ...) {
   va_list args;
   va_start(args, format);
@@ -55,7 +65,9 @@ void process(char *str2, const char *format, ...) {
         }
         case 'd':
         case 'i': {  // Обработка цифра
+          foo(&args);
           int ch = (int)va_arg(args, int);
+          // foo(&args);
           int i2 = 0;
           while (str2[i2] != '\0') {
             i2++;
@@ -66,7 +78,7 @@ void process(char *str2, const char *format, ...) {
           str2[i2++] = '\0';
 
           i2 = 0;
-          printf("цифра: %d\n", ch);
+          printf("цифра: %c\n", ch);
 
           break;
         }
@@ -102,7 +114,7 @@ int main() {
   char *mss;
   mss = calloc(1000, sizeof(char));
 
-  process(mss, "s%smss%sprod%c %d %i a", "Hello ", "World!", 'w', 500, 1000);
+  process(mss, "%d %d %dsadasda", 500, 1000, 100);
   printf("\n%s\n", mss);
   free(mss);
   return 0;

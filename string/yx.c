@@ -61,53 +61,62 @@ hex *init_hex() {
 
   return hex;
 }
-// Функция для преобразования int в шестнадцатеричную строку
 void intToHexStatic(int num, char result[]) {
-  hex *xex = init_hex();
-
+  hex *hexArray = init_hex();
   int index = 0;
-  char buff[200];
-  // Статический массив для хранения шестнадцатеричного представления
-  // Максимально возможное шестнадцатеричное представление для int (8 символов)
-  // + нулевой символ
-  for (int i = sizeof(num) * 8 - 1; i >= 0; --i) {
-    // printf("%d ",i);
-    //  Получаем текущий бит числа
-    int bit = (num >> i) & 1;
+  char buff[200];  // Инициализация нулями для избежания случайных значений
 
-    // Добавляем соответствующий шестнадцатеричный символ в строку
-    buff[index++] = bit + '0';
+  // Преобразование числа в двоичное представление
+  for (int i = 31; i >= 0; --i) {
+    int bit = (num >> i) & 1;
+    buff[index++] = bit + '0';  // Добавляем бит в буфер
   }
-  int i2 = 0, i3 = 0, counter = 0, zzz = 0;
-  for (int i = 0; i < sizeof(num) * 8 - 1; i = i + 4) {
-    printf("%d ", i);
-    while (i2 < 10) {
-      while (i3 < 5) {
-        if (buff[i + i3] == xex[i2].num[i3]) {
+  index = 0;
+  // Преобразование двоичного представления в шестнадцатеричное
+  int i = 0, counter = 0;
+  while (i < 32 && buff[i] != '\0') {
+    int digit = 0;
+    while (digit < 16) {
+      for (int j = 0; j < 4; ++j) {
+        if (buff[i + j] == hexArray[digit].num[j]) {
           counter++;
         }
         if (counter == 4) {
-          // result[zzz++]=xex[i2].xx;
-          printf("%c", xex[i2].xx);
+          result[index++] = hexArray[digit].xx;
         }
-        // printf("%d ",i);
-        i3++;
       }
-      i3 = 0;
       counter = 0;
-      i2++;
+      digit++;
     }
-    i2 = 0;
+    digit = 0;
+    i += 4;
   }
+
+  result[index] = '\0';  // Добавляем нулевой символ в конец строки
+  char buff_2;
+  index = 0;
+  while (result[index] == '0') {
+    index++;
+  }
+  i = 0;
+
+  while (result[i + index] != '\0') {
+    result[i] = result[i + index];
+    printf("%c", result[i + index]);
+    i++;
+  }
+  result[i] = '\0';
+  printf("%d", index);
 }
 
 int main() {
-  int number = 25;
-  char hexString[200];  // Массив для хранения шестнадцатеричного представления
+  int number = 2543;
+  char hexString[200];
 
   intToHexStatic(number, hexString);
 
   printf("Шестнадцатеричное представление: %s\n", hexString);
 
+  free(init_hex());  // Освобождаем память, выделенную под массив hex
   return 0;
 }

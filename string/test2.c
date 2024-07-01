@@ -62,7 +62,7 @@ void intToHexStatic(int num, char result[]) {
     int bit = (num >> i) & 1;
     buff[index++] = bit + '0';  // Добавляем бит в буфер
   }
-
+  index = 0;
   // Преобразование двоичного представления в шестнадцатеричное
   int i = 0, counter = 0;
   while (i < 32 && buff[i] != '\0') {
@@ -74,7 +74,6 @@ void intToHexStatic(int num, char result[]) {
         }
         if (counter == 4) {
           result[index++] = hexArray[digit].xx;
-          printf("%c ", hexArray[digit].xx);
         }
       }
       counter = 0;
@@ -83,12 +82,26 @@ void intToHexStatic(int num, char result[]) {
     digit = 0;
     i += 4;
   }
-  printf("%s", result);
+
   result[index] = '\0';  // Добавляем нулевой символ в конец строки
+  char buff_2;
+  index = 0;
+  while (result[index] == '0') {
+    index++;
+  }
+  i = 0;
+
+  while (result[i + index] != '\0') {
+    result[i] = result[i + index];
+    printf("%c", result[i + index]);
+    i++;
+  }
+  result[i] = '\0';
+  printf("%d", index);
 }
 
 int main() {
-  int number = 255;
+  int number = 2543;
   char hexString[200];
 
   intToHexStatic(number, hexString);

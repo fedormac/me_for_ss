@@ -64,15 +64,14 @@ hex *init_hex() {
 void intToHexStatic(int num, char result[]) {
   hex *hexArray = init_hex();
   int index = 0;
-  char buff[200];  // Инициализация нулями для избежания случайных значений
+  char buff[200];
 
-  // Преобразование числа в двоичное представление
   for (int i = 31; i >= 0; --i) {
     int bit = (num >> i) & 1;
-    buff[index++] = bit + '0';  // Добавляем бит в буфер
+    buff[index++] = bit + '0';
   }
   index = 0;
-  // Преобразование двоичного представления в шестнадцатеричное
+
   int i = 0, counter = 0;
   while (i < 32 && buff[i] != '\0') {
     int digit = 0;
@@ -92,7 +91,7 @@ void intToHexStatic(int num, char result[]) {
     i += 4;
   }
 
-  result[index] = '\0';  // Добавляем нулевой символ в конец строки
+  result[index] = '\0';
   char buff_2;
   index = 0;
   while (result[index] == '0') {
@@ -117,6 +116,6 @@ int main() {
 
   printf("Шестнадцатеричное представление: %s\n", hexString);
 
-  free(init_hex());  // Освобождаем память, выделенную под массив hex
+  free(init_hex());
   return 0;
 }

@@ -12,14 +12,12 @@ typedef int bool;
 #include <stdio.h>
 
 int main() {
-  int number = 15;     // Пример числа
-  char hexString[10];  // Массив для хранения шестнадцатеричного представления
+  int number = 255;
+  char buffer[10];  // Буфер достаточно большой для хранения результата
 
-  // Преобразование числа в шестнадцатеричную строку
-  sprintf(hexString, "%x", number);
+  sprintf(buffer, "%o", number);
 
-  // Вывод результата
-  printf("Шестнадцатеричное представление: %s\n", hexString);
+  printf("Восьмеричное представление: %s\n", buffer);
 
   return 0;
 }

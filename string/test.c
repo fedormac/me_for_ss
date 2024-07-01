@@ -10,31 +10,45 @@ typedef int bool;
 
 #include <math.h>
 #include <stdio.h>
-float ost(float number) { return number = number - (int)number; }
-
-int countDigitsAfterDot(float number) {
-  int digits = 0;
-  float fraction = ost(number);  // Извлекаем дробную часть числа
-
-  // Удаляем знак минус, если число отрицательное
-  if (fraction < 0) {
-    fraction = -fraction;
-  }
-  while (fmod(fraction, 10) != 0.0) {
-    printf("%f ", fraction);
-    fraction *= 10;
-    digits++;
-  }
-
-  return --digits;
-}
 
 int main() {
-  float number = 123.85559f;
-  int digits = countDigitsAfterDot(number);
-  printf("Количество цифр после десятичной точки: %d\n", digits);
+  int number = 15;     // Пример числа
+  char hexString[10];  // Массив для хранения шестнадцатеричного представления
+
+  // Преобразование числа в шестнадцатеричную строку
+  sprintf(hexString, "%x", number);
+
+  // Вывод результата
+  printf("Шестнадцатеричное представление: %s\n", hexString);
+
   return 0;
 }
+
+// float ost(float number) { return number = number - (int)number; }
+
+// int countDigitsAfterDot(float number) {
+//   int digits = 0;
+//   float fraction = ost(number);  // Извлекаем дробную часть числа
+
+//   // Удаляем знак минус, если число отрицательное
+//   if (fraction < 0) {
+//     fraction = -fraction;
+//   }
+//   while (fmod(fraction, 10) != 0.0) {
+//     printf("%f ", fraction);
+//     fraction *= 10;
+//     digits++;
+//   }
+
+//   return --digits;
+// }
+
+// int main() {
+//   float number = 123.85559f;
+//   int digits = countDigitsAfterDot(number);
+//   printf("Количество цифр после десятичной точки: %d\n", digits);
+//   return 0;
+// }
 
 // #include <ctype.h>
 // #include <stdarg.h>

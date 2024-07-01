@@ -37,13 +37,7 @@ void prod(double num, char *ss, int counter) {
 
   itoa(cheld, ss, 10);
   ost = num - cheld;
-  //
-  int i = 0;
-  while (i != counter) {
-    ost *= 10;
 
-    i++;
-  }
   ostd = (int)ost;
   ostd += 1;
   printf("%d", ostd);
@@ -55,9 +49,9 @@ void prod(double num, char *ss, int counter) {
 int main() {
   double number = 12340.15;
   char ss[50] = {};
-  prod(number, ss, 6);
+  prod(number, ss, 1);
   printf("Original Number: %f\n", number);
-  printf("f : %.6f\n", number);
-  printf("str: %s\n", ss);
+  printf("f : %.1f\n", number);
+  printf("st: %s\n", ss);
   return 0;
 }

@@ -12,12 +12,13 @@ typedef int bool;
 #include <stdio.h>
 
 int main() {
-  int number = 255;
-  char buffer[10];  // Буфер достаточно большой для хранения результата
+  double ptr = -51.500;
 
-  sprintf(buffer, "%o", number);
+  char buffer[200];  // Буфер достаточно большой для хранения результата
 
-  printf("Восьмеричное представление: %s\n", buffer);
+  sprintf(buffer, "Указатель на %.34e\n", ptr);
+
+  printf("%s", buffer);
 
   return 0;
 }

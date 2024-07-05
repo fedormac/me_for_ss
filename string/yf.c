@@ -25,34 +25,92 @@ char *itoa(int number, char *destination, int base) {
 }
 void prod(double num, char *ss, int counter) {
   double num2 = num;
-  double ost;
-  int ostd;
-  int zdvig = 0;
   int cheld = 0;
+  double ost = 0;
+  int ostd = 0;
+  char t = '.';
+  double zdvig = 0;
   int zcounter = 0;
+  while (num2 > 10) {
+    num2 /= 10;
+    zcounter++;
+  }
+  while (num > 10) {
+    num /= 10;
 
-  // double num2 = num;
-  // double ost;
-  // int ostd;
-  // int zdvig = 0;
-  // int cheld = 0;
-  // while (num2 >= 1) {
-  //   num2 /= 10;
-  //   zdvig++;
+    zdvig++;
+  }
+  cheld = (int)num;
+  ost = num - cheld;
+  int i = 0;
+
+  while (i < counter) {
+    ost *= 10;
+    i++;
+  }
+  double ttt = 0;
+  double sss = 0;
+  ttt = (int)ost;
+  sss = ost - ttt;
+  if (sss * 10 >= 5) {
+    ost = ost + 1;
+  }
+
+  ostd = (int)ost;
+  ss[0] = cheld + '0';
+  ss[1] = t;
+
+  itoa(ostd, ss + 2, 10);
+  zcounter += strlen(ss) - 2;
+
+  int len = 0;
+  len = strlen(ss);
+  ss[len] = 'e';
+
+  ss[len + 1] = '+';
+  zdvig = zdvig * pow(10, -1);
+  itoa((int)zdvig, ss + len + 2, 10);
+  zdvig = zdvig * 10;
+  itoa((int)zdvig, ss + len + 3, 10);
+  char mss_pp[120] = {};
+  mss_pp[0] = ss[0];
+  mss_pp[1] = ss[1];
+  int i5 = 0;
+  while (i5 < (counter - zcounter + 2)) {
+    mss_pp[i5 + 2] = '0';
+    i5++;
+  }
+  strcpy(mss_pp + (counter - zcounter + 4), ss + 2);
+  strcpy(ss, mss_pp);
+
+  //   double num2 = num;
+  //   int ostd;
+  //   int celd;
+  //   int zdvig = 0;
+  //   int cheld = 0;
+  //   int zcounter = 0;
+  //   int i=0;
+  //   int len=0;
+
+  // cheld=(int)num;
+  // itoa(cheld,ss,10);
+  // num2-=cheld;
+  // while (i<counter)
+  // {
+  //   num2*=10;
+  //   i++;
   // }
-  // cheld = (int)num;
+  // printf("%f\n",num2);
+  // num2+=1;
+  // len=strlen(ss);
 
-  // itoa(cheld, ss, 10);
-  // ost = num - cheld;
-
-  // ostd = (int)ost;
-  // ostd += 1;
-  // ss[zdvig] = '.';
-  // itoa(ostd, ss + zdvig + 1, 10);
+  // ss[len]='.';
+  // ostd=(int)num2;
+  // itoa(ostd,ss+(len+1),10);
 }
 
 int main() {
-  double number = 12340.15;
+  double number = 12340.015;
   char ss[50] = {};
   prod(number, ss, 6);
   printf("Original Number: %f\n", number);

@@ -26,13 +26,63 @@ char *itoa(int number, char *destination, int base) {
 }
 void prod(double num, char *ss, int counter) {
   if (num >= 1) {
+    double num2 = num;
     int cheld = 0;
     double ost = 0;
     int ostd = 0;
     char t = '.';
     double zdvig = 0;
+    int zcounter = 0;
+    while (num2 > 10) {
+      num2 /= 10;
+    }
     while (num > 10) {
       num /= 10;
+
+      zdvig++;
+    }
+    cheld = (int)num;
+    ost = num - cheld;
+    int i = 0;
+    printf("%f", ost);
+    while (i < counter) {
+      ost *= 10;
+      i++;
+    }
+    double ttt = 0;
+    double sss = 0;
+    ttt = (int)ost;
+    sss = ost - ttt;
+    if (sss * 10 >= 5) {
+      ost = ost + 1;
+    }
+
+    ostd = (int)ost;
+    ss[0] = cheld + '0';
+    ss[1] = t;
+    printf("%d", ostd);
+    itoa(ostd, ss + 2, 10);
+    zcounter = strlen(ss);
+    printf("ss%dss", zcounter);
+    int len = 0;
+    len = strlen(ss);
+    ss[len] = 'e';
+
+    ss[len + 1] = '+';
+    zdvig = zdvig * pow(10, -1);
+    itoa((int)zdvig, ss + len + 2, 10);
+    zdvig = zdvig * 10;
+    itoa((int)zdvig, ss + len + 3, 10);
+  } else {
+    int cheld = 0;
+    double ost = 0;
+    int ostd = 0;
+    char t = '.';
+    double zdvig = 0;
+    num = num * (-1);
+    while (num > 10) {
+      num /= 10;
+
       zdvig++;
     }
     cheld = (int)num;
@@ -63,52 +113,58 @@ void prod(double num, char *ss, int counter) {
     itoa((int)zdvig, ss + len + 2, 10);
     zdvig = zdvig * 10;
     itoa((int)zdvig, ss + len + 3, 10);
+    // int cheld = 0;
+    // double ost = 0;
+    // int ostd = 0;
+    // char t = '.';
+    // double zdvig = 0;
+    // num = num * (-1);
+    // while (num > 10)
+    // {
+    //   num /= 10;
 
-  } else {
-    int cheld = 0;
-    double ost = 0;
-    int ostd = 0;
-    char t = '.';
-    double zdvig = 0;
-    while (num < 1) {
-      num *= 10;
-      zdvig++;
-    }
-    printf("%f", num);
-    cheld = (int)num;
-    ost = num - cheld;
-    int i = 0;
-    while (i < counter) {
-      ost *= 10;
-      i++;
-    }
-    double ttt = 0;
-    double sss = 0;
-    ttt = (int)ost;
-    sss = ost - ttt;
-    if (sss * 10 >= 5) {
-      ost = ost + 1;
-    }
+    //   zdvig++;
+    // }
+    // //printf("%f\n", num);
+    // cheld = (int)num;
+    // //printf("%d\n", cheld);
+    // ost = num - cheld;
+    // int i = 0;
+    // while (i < counter)
+    // {
+    //   ost *= 10;
+    //   i++;
+    // }
+    // //printf("%f\n", ost);
+    // double ttt = 0;
+    // double sss = 0;
+    // ttt = (int)ost;
+    // sss = ost - ttt;
+    // if (sss * 10 >= 5)
+    // {
+    //   ost = ost + 1;
+    // }
 
-    ostd = (int)ost;
-    ss[0] = cheld + '0';
-    ss[1] = t;
-    itoa(ostd, ss + 2, 10);
-    int len = 0;
-    len = strlen(ss);
-    ss[len] = 'e';
+    // ostd = (int)ost;
+    // //printf("%d\n", cheld);
+    // ss[0] = cheld + '0';
+    // ss[1] = t;
+    // itoa(ostd, ss + 2, 10);
+    // int len = 0;
+    // len = strlen(ss);
+    // ss[len] = 'e';
 
-    ss[len + 1] = '-';
-    zdvig = zdvig * pow(10, -1);
-    itoa((int)zdvig, ss + len + 2, 10);
-    zdvig = zdvig * 10;
-    itoa((int)zdvig, ss + len + 3, 10);
+    // ss[len + 1] = '-';
+    // zdvig = zdvig * pow(10, -1);
+    // itoa((int)zdvig, ss + len + 2, 10);
+    // zdvig = zdvig * 10;
+    // itoa((int)zdvig, ss + len + 3, 10);
   }
 }
 int main() {
-  double number = 10.015;
-  char ss[50] = {};
-  prod(number, ss, 2);
+  double number = 100.015;
+  char ss[500] = {};
+  prod(number, ss, 6);
   printf("Original Number: %f\n", number);
   printf("Exponential Representation: %e\n", number);
   printf("str: %s\n", ss);

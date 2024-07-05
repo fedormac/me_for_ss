@@ -29,29 +29,34 @@ void prod(double num, char *ss, int counter) {
   int ostd;
   int zdvig = 0;
   int cheld = 0;
-  while (num2 >= 1) {
-    num2 /= 10;
-    zdvig++;
-  }
-  cheld = (int)num;
+  int zcounter = 0;
 
-  itoa(cheld, ss, 10);
-  ost = num - cheld;
+  // double num2 = num;
+  // double ost;
+  // int ostd;
+  // int zdvig = 0;
+  // int cheld = 0;
+  // while (num2 >= 1) {
+  //   num2 /= 10;
+  //   zdvig++;
+  // }
+  // cheld = (int)num;
 
-  ostd = (int)ost;
-  ostd += 1;
-  printf("%d", ostd);
-  ss[zdvig] = '.';
-  itoa(ostd, ss + zdvig + 1, 10);
-  // printf("%f\n",ost);
+  // itoa(cheld, ss, 10);
+  // ost = num - cheld;
+
+  // ostd = (int)ost;
+  // ostd += 1;
+  // ss[zdvig] = '.';
+  // itoa(ostd, ss + zdvig + 1, 10);
 }
 
 int main() {
   double number = 12340.15;
   char ss[50] = {};
-  prod(number, ss, 1);
+  prod(number, ss, 6);
   printf("Original Number: %f\n", number);
-  printf("f : %.1f\n", number);
+  printf("f : %f\n", number);
   printf("st: %s\n", ss);
   return 0;
 }

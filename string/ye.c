@@ -45,7 +45,7 @@ void prod(double num, char *ss, int counter) {
     cheld = (int)num;
     ost = num - cheld;
     int i = 0;
-    printf("ss%dss", zcounter);
+
     while (i < counter) {
       ost *= 10;
       i++;
@@ -64,7 +64,7 @@ void prod(double num, char *ss, int counter) {
 
     itoa(ostd, ss + 2, 10);
     zcounter += strlen(ss) - 2;
-    printf("ss%dss", zcounter);
+
     int len = 0;
     len = strlen(ss);
     ss[len] = 'e';
@@ -84,7 +84,7 @@ void prod(double num, char *ss, int counter) {
     }
     strcpy(mss_pp + (counter - zcounter + 4), ss + 2);
     strcpy(ss, mss_pp);
-    printf(" %s \n", mss_pp);
+
   } else if (num >= 0 && num < 1) {
     double num2 = num;
     int cheld = 0;
@@ -105,7 +105,7 @@ void prod(double num, char *ss, int counter) {
     cheld = (int)num;
     ost = num - cheld;
     int i = 0;
-    printf("ss%dss", zcounter);
+
     while (i < counter) {
       ost *= 10;
       i++;
@@ -124,7 +124,7 @@ void prod(double num, char *ss, int counter) {
 
     itoa(ostd, ss + 2, 10);
     zcounter += strlen(ss) - 2;
-    printf("ss%dss", zcounter);
+
     int len = 0;
     len = strlen(ss);
     ss[len] = 'e';
@@ -144,10 +144,10 @@ void prod(double num, char *ss, int counter) {
     }
     strcpy(mss_pp + (counter - zcounter + 4), ss + 2);
     strcpy(ss, mss_pp);
-    printf(" %s \n", mss_pp);
+
   } else if (num < 0) {
     num *= -1;
-    printf("%f", num);
+
     if (num >= 1) {
       double num2 = num;
       int cheld = 0;
@@ -168,7 +168,7 @@ void prod(double num, char *ss, int counter) {
       cheld = (int)num;
       ost = num - cheld;
       int i = 0;
-      printf("ss%dss", zcounter);
+
       while (i < counter) {
         ost *= 10;
         i++;
@@ -187,7 +187,7 @@ void prod(double num, char *ss, int counter) {
 
       itoa(ostd, ss + 2, 10);
       zcounter += strlen(ss) - 2;
-      printf("ss%dss", zcounter);
+
       int len = 0;
       len = strlen(ss);
       ss[len] = 'e';
@@ -203,12 +203,12 @@ void prod(double num, char *ss, int counter) {
       mss_pp[2] = ss[1];
       int i5 = 0;
       while (i5 < (counter - zcounter + 3)) {
-        mss_pp[i5 + 2] = '0';
+        mss_pp[i5 + 3] = '0';
         i5++;
       }
       strcpy(mss_pp + (counter - zcounter + 5), ss + 2);
       strcpy(ss, mss_pp);
-      printf(" %s \n", mss_pp);
+
     } else if (num >= 0 && num < 1) {
       double num2 = num;
       int cheld = 0;
@@ -229,7 +229,7 @@ void prod(double num, char *ss, int counter) {
       cheld = (int)num;
       ost = num - cheld;
       int i = 0;
-      printf("ss%dss", zcounter);
+
       while (i < counter) {
         ost *= 10;
         i++;
@@ -248,7 +248,7 @@ void prod(double num, char *ss, int counter) {
 
       itoa(ostd, ss + 2, 10);
       zcounter += strlen(ss) - 2;
-      printf("ss%dss", zcounter);
+
       int len = 0;
       len = strlen(ss);
       ss[len] = 'e';
@@ -264,17 +264,16 @@ void prod(double num, char *ss, int counter) {
       mss_pp[2] = ss[1];
       int i5 = 0;
       while (i5 < (counter - zcounter + 3)) {
-        mss_pp[i5 + 2] = '0';
+        mss_pp[i5 + 3] = '0';
         i5++;
       }
       strcpy(mss_pp + (counter - zcounter + 5), ss + 2);
       strcpy(ss, mss_pp);
-      printf(" %s \n", mss_pp);
     }
   }
 }
 int main() {
-  double number = -100.0105;
+  double number = -0.0105;
   char ss[500] = {};
   prod(number, ss, 6);
   printf("Original Number: %f\n", number);

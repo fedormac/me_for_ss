@@ -26,7 +26,7 @@ char* itoa(int number, char* destination, int base) {
 #include <string.h>
 
 // Функция для конвертации числа в шестнадцатеричную строку
-void uint_to_hex(uint64_t value, char* out) {
+void uint_to_hex(uint64_t* value, char* out) {
   static const char hexchars[] = "0123456789abcdef";
   char* p = out + strlen(out);
   for (; value > 0; value /= 16) {

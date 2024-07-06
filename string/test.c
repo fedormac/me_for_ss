@@ -12,17 +12,14 @@ typedef int bool;
 #include <stdio.h>
 
 int main() {
-  double ptr = -51.500;
+  unsigned int number = -12345;
+  char buffer[20];  // Убедитесь, что размер буфера достаточно большой
 
-  char buffer[200];  // Буфер достаточно большой для хранения результата
+  sprintf(buffer, "%u", number);
 
-  sprintf(buffer, "Указатель на %.34e\n", ptr);
-
-  printf("%s", buffer);
-
+  printf("Вывод числа: %s\n", buffer);
   return 0;
 }
-
 // float ost(float number) { return number = number - (int)number; }
 
 // int countDigitsAfterDot(float number) {

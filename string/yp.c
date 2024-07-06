@@ -26,20 +26,30 @@ char* itoa(int number, char* destination, int base) {
 #include <string.h>
 
 // Функция для конвертации числа в шестнадцатеричную строку
+// void uint_to_hex(void* value, char* out) {
+//   static const char hexchars[] = "0123456789abcdef";
+//   uint64_t myVar = (uint64_t)value;
+//   printf("%ld",myVar);
+//   char* p = out + strlen(out);
+//   for (; value > 0; myVar /= 16) {
+//     *--p = hexchars[myVar % 16];
+//   }
+//  *--p = 'x';
+//  *--p = '0';
+//  strcpy(out, p);
+// }
 void uint_to_hex(void* value, char* out) {
   static const char hexchars[] = "0123456789abcdef";
   uint64_t myVar = (uint64_t)value;
   char* p = out + strlen(out);
-  for (; value > 0; myVar /= 16) {
+  for (; myVar > 0; myVar /= 16) {
     *--p = hexchars[myVar % 16];
   }
-  *--p = 'x';
-  *--p = '0';
-  strcpy(out, p);
-}
 
+  strcat(out, p);
+}
 int main() {
-  int myVar = 42;  // Переменная, адрес которой мы захотим записать
+  int myVar = 42;
   char buffer[2000];  // Буфер для хранения адреса переменной
 
   // Получаем адрес переменной

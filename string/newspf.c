@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdarg.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -20,13 +21,15 @@ void process(char *str2, const char *format, ...);
 void kluch_f(double num, char *ss, int counter);
 void kluch_o(int num, char result[]);
 void kluch_x(int num, char result[]);
+void kluch_p(void *value, char *out);
 
 int main() {
   char *mss;
   mss = calloc(1000, sizeof(char));
+  int msss = 234;
 
-  process(mss, "s %s %c %e %d %i %f %o %x d", "mss", 's', -50.345, 500, 1000,
-          -100.4, 255, 255);
+  process(mss, "s %s %c %e %d %i %f %o %x  %p  d", "mss", 's', -50.345, 500,
+          1000, -100.4, 255, 255, &msss);
   printf("\n%s\n", mss);
   free(mss);
   return 0;
@@ -253,6 +256,19 @@ void process(char *str2, const char *format, ...) {
 
           break;
         }
+        case 'p': {
+          void *num = va_arg(args, void *);
+          int i2 = 0;
+          while (str2[i2] != '\0') {
+            i2++;
+          }
+          kluch_p(num, str2 + i2);
+
+          i2 = 0;
+          printf("p: %p\n", num);
+
+          break;
+        }
       }
       // printf("%dd\n", set.toch);
       // printf("%c\n", format[i + 1]);
@@ -274,6 +290,16 @@ void process(char *str2, const char *format, ...) {
   }
   va_end(args);
   // free(str);
+}
+void kluch_p(void *value, char *out) {
+  static const char hexchars[] = "0123456789abcdef";
+  uint64_t myVar = (uint64_t)value;
+  char *p = out + strlen(out);
+  for (; myVar > 0; myVar /= 16) {
+    *--p = hexchars[myVar % 16];
+  }
+
+  strcat(out, p);
 }
 void kluch_x(int num, char result[]) {
   hex *hexArray = init_hex_16();
@@ -530,7 +556,6 @@ void kluch_e(double num, char *ss, int counter) {
     }
     strcpy(mss_pp + (counter - zcounter + 4), ss + 2);
     strcpy(ss, mss_pp);
-
   } else if (num >= 0 && num < 1) {
     double num2 = num;
     int cheld = 0;
@@ -590,7 +615,6 @@ void kluch_e(double num, char *ss, int counter) {
     }
     strcpy(mss_pp + (counter - zcounter + 4), ss + 2);
     strcpy(ss, mss_pp);
-
   } else if (num < 0) {
     num *= -1;
 
@@ -654,7 +678,6 @@ void kluch_e(double num, char *ss, int counter) {
       }
       strcpy(mss_pp + (counter - zcounter + 5), ss + 2);
       strcpy(ss, mss_pp);
-
     } else if (num >= 0 && num < 1) {
       double num2 = num;
       int cheld = 0;

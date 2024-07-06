@@ -24,93 +24,109 @@ char *itoa(int number, char *destination, int base) {
   return destination;
 }
 void prod(double num, char *ss, int counter) {
-  double num2 = num;
-  int cheld = 0;
-  double ost = 0;
-  int ostd = 0;
-  char t = '.';
-  double zdvig = 0;
-  int zcounter = 0;
-  while (num2 > 10) {
-    num2 /= 10;
-    zcounter++;
+  if (num > 0) {
+    double num2 = num;
+    int cheld = 0;
+    double ost = 0;
+    int ostd = 0;
+    char t = '.';
+    double zdvig = 0;
+    int zcounter = 0;
+    while (num2 > 10) {
+      num2 /= 10;
+      zcounter++;
+    }
+
+    cheld = (int)num;
+    ost = num - cheld;
+    int i = 0;
+    printf("%d\n", cheld);
+    itoa(cheld, ss, 10);
+    int len2 = strlen(ss);
+    ss[len2] = t;
+
+    double ttt = 0;
+    double sss = 0;
+    ttt = (int)ost;
+    sss = ost - ttt;
+    if (sss * 10 >= 5) {
+      ost = ost + 1;
+    }
+    ost = ost + (1 / pow(10, counter));
+
+    printf("%f\n", ost);
+    zcounter = 0;
+    int i5 = 0;
+    while (i5 != counter && ostd == 0) {
+      ost *= 10;
+      ostd = (int)ost;
+      printf("%d\n", ostd);
+      itoa(ostd, ss + (len2 + i5 + 1), 10);
+      i5++;
+      zcounter++;
+    }
+    i5 = 0;
+    while (i5 != counter - zcounter) {
+      ost *= 10;
+      i5++;
+    }
+    ostd = (int)ost;
+    itoa(ostd, ss + (len2 + zcounter), 10);
+  } else {
+    num *= -1;
+    double num2 = num;
+    int cheld = 0;
+    double ost = 0;
+    int ostd = 0;
+    char t = '.';
+    double zdvig = 0;
+    int zcounter = 0;
+    while (num2 > 10) {
+      num2 /= 10;
+      zcounter++;
+    }
+
+    cheld = (int)num;
+    ost = num - cheld;
+    int i = 0;
+    printf("%d\n", cheld);
+    ss[0] = '-';
+    itoa(cheld, ss + 1, 10);
+    int len2 = strlen(ss);
+    ss[len2] = t;
+
+    double ttt = 0;
+    double sss = 0;
+    ttt = (int)ost;
+    sss = ost - ttt;
+    if (sss * 10 >= 5) {
+      ost = ost + 1;
+    }
+    ost = ost + (1 / pow(10, counter));
+
+    printf("%f\n", ost);
+    zcounter = 0;
+    int i5 = 0;
+    while (i5 != counter && ostd == 0) {
+      ost *= 10;
+      ostd = (int)ost;
+      printf("%d\n", ostd);
+      itoa(ostd, ss + (len2 + i5 + 1), 10);
+      i5++;
+      zcounter++;
+    }
+    i5 = 0;
+    while (i5 != counter - zcounter) {
+      ost *= 10;
+      i5++;
+    }
+    ostd = (int)ost;
+    itoa(ostd, ss + (len2 + zcounter), 10);
   }
-  while (num > 10) {
-    num /= 10;
-
-    zdvig++;
-  }
-  cheld = (int)num;
-  ost = num - cheld;
-  int i = 0;
-
-  while (i < counter) {
-    ost *= 10;
-    i++;
-  }
-  double ttt = 0;
-  double sss = 0;
-  ttt = (int)ost;
-  sss = ost - ttt;
-  if (sss * 10 >= 5) {
-    ost = ost + 1;
-  }
-
-  ostd = (int)ost;
-  ss[0] = cheld + '0';
-  ss[1] = t;
-
-  itoa(ostd, ss + 2, 10);
-  zcounter += strlen(ss) - 2;
-
-  int len = 0;
-  len = strlen(ss);
-  ss[len] = 'e';
-
-  ss[len + 1] = '+';
-  zdvig = zdvig * pow(10, -1);
-  itoa((int)zdvig, ss + len + 2, 10);
-  zdvig = zdvig * 10;
-  itoa((int)zdvig, ss + len + 3, 10);
-  char mss_pp[120] = {};
-  mss_pp[0] = ss[0];
-  mss_pp[1] = ss[1];
-  int i5 = 0;
-  while (i5 < (counter - zcounter + 2)) {
-    mss_pp[i5 + 2] = '0';
-    i5++;
-  }
-  strcpy(mss_pp + (counter - zcounter + 4), ss + 2);
-  strcpy(ss, mss_pp);
-
-  //   double num2 = num;
-  //   int ostd;
-  //   int celd;
-  //   int zdvig = 0;
-  //   int cheld = 0;
-  //   int zcounter = 0;
-  //   int i=0;
-  //   int len=0;
-
-  // cheld=(int)num;
-  // itoa(cheld,ss,10);
-  // num2-=cheld;
-  // while (i<counter)
-  // {
-  //   num2*=10;
-  //   i++;
-  // }
-  // printf("%f\n",num2);
-  // num2+=1;
-  // len=strlen(ss);
-
-  // ss[len]='.';
-  // ostd=(int)num2;
-  // itoa(ostd,ss+(len+1),10);
 }
 
 int main() {
-  double number = 12340.015;
+  double number = -12340.15;
   char ss[50] = {};
   prod(number, ss, 6);
   printf("Original Number: %f\n", number);

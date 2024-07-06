@@ -43,7 +43,7 @@ int main() {
   char buffer[2000];  // Буфер для хранения адреса переменной
 
   // Получаем адрес переменной
-  uint64_t myVar = (uint64_t)&myVar;
+  // uint64_t myVar = (uint64_t)&myVar;
 
   // Конвертируем адрес в шестнадцатеричную строку
   uint_to_hex(&myVar, buffer);

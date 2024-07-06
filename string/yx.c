@@ -8,7 +8,7 @@ typedef struct {
   char xx;
 } hex;
 
-hex *init_hex() {
+hex *init_hex_16() {
   hex *hex = calloc(16, sizeof(hex));
 
   hex[0].num = "0000";
@@ -62,7 +62,7 @@ hex *init_hex() {
   return hex;
 }
 void intToHexStatic(int num, char result[]) {
-  hex *hexArray = init_hex();
+  hex *hexArray = init_hex_16();
   int index = 0;
   char buff[200];
 

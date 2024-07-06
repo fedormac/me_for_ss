@@ -33,6 +33,7 @@ void uint_to_hex(uint64_t value, char* out) {
     *--p = hexchars[value % 16];
     printf("%ld ", value);
   }
+  printf("%s ", p);
 }
 
 int main() {
